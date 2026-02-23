@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramount | Partner Growth Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --total-blue: #002d72;
+            --total-red: #ed1c24;
+            --total-ice: #00a3e0;
+            --total-dark: #0a1118;
+            --total-panel: #16212c;
+            --total-border: #2d3d4d;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--total-dark);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            background-image: radial-gradient(circle at 50% 0%, rgba(0, 45, 114, 0.2) 0%, transparent 75%);
+        }
+
+        .brand-gradient {
+            background: linear-gradient(135deg, var(--total-blue) 0%, #001a45 100%);
+        }
+
+        .ice-glow {
+            box-shadow: 0 0 30px rgba(0, 163, 224, 0.15);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--total-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--total-border); border-radius: 10px; }
+
+        /* Plan Cards */
+        .plan-card {
+            background-color: var(--total-panel);
+            border: 2px solid var(--total-border);
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .plan-card:hover { border-color: #4b5563; transform: translateY(-2px); }
+        .plan-card.active {
+            border-color: var(--total-red);
+            background-color: rgba(237, 28, 36, 0.08);
+            box-shadow: 0 10px 20px -10px rgba(237, 28, 36, 0.2);
+        }
+
+        /* Preset Chips */
+        .preset-chip {
+            background: var(--total-border);
+            padding: 4px 12px;
+            border-radius: 99px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .preset-chip:hover { background: #4b5563; }
+        .preset-chip.active { background: var(--total-ice); color: white; }
+
+        /* Stats Cards */
+        .card-surface {
+            background-color: var(--total-panel);
+            border: 1px solid var(--total-border);
+            border-radius: 16px;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--total-ice);
+            letter-spacing: 0.1em;
+        }
+
+        .stat-detail {
+            font-size: 0.6rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.05em;
+            line-height: 1.4;
+        }
+
+        /* Inputs */
+        input[type="number"] {
+            background-color: #0a1118;
+            border: 1px solid var(--total-border);
+            border-radius: 4px;
+            padding: 4px 8px;
+            color: var(--total-ice);
+            font-weight: 900;
+            font-size: 0.85rem;
+            width: 70px;
+            text-align: center;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="number"]:focus {
+            border-color: var(--total-ice);
+        }
+
+        /* Toggle Switch */
+        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider {
+            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #2d3d4d; transition: .4s; border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px;
+            background-color: white; transition: .4s; border-radius: 50%;
+        }
+        input:checked + .slider { background-color: var(--total-red); }
+        input:checked + .slider:before { transform: translateX(22px); }
+
+        /* Roadmap Table - Refined for compactness and larger text */
+        .roadmap-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: auto;
+        }
+
+        .roadmap-table th {
+            background: rgba(0,0,0,0.2);
+            padding: 0.85rem 0.75rem;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #64748b;
+            border-bottom: 2px solid var(--total-border);
+        }
+
+        .roadmap-row {
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .roadmap-row:hover {
+            background: rgba(255,255,255,0.02);
+        }
+
+        .growth-badge {
+            font-size: 0.6rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: 800;
+            background: rgba(0, 163, 224, 0.15);
+            color: var(--total-ice);
+            display: inline-block;
+        }
+
+        .milestone-tag {
+            font-size: 0.55rem;
+            padding: 1px 4px;
+            border-radius: 3px;
+            font-weight: 800;
+            background: var(--total-red);
+            color: white;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-top: 2px;
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; background-image: none !important; }
+            .card-surface { border: 1px solid #ccc !important; color: black !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="border-b border-gray-800 bg-black/40 backdrop-blur-xl sticky top-0 z-50 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="bg-total-red p-1.5 rounded-lg flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-black italic tracking-tighter uppercase leading-none">
+                        Paramount <span class="text-total-red">Partner Growth Model</span>
+                    </span>
+                    <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest mt-0.5">Dealer Prosperity Dashboard</span>
+                </div>
+            </div>
+            <div class="hidden md:flex gap-4">
+                <button onclick="window.print()" class="text-[10px] font-black text-gray-400 hover:text-white border border-gray-800 px-4 py-2 rounded-full transition-all uppercase tracking-widest">
+                    Export Forecast
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-6 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Sidebar: Configuration -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="card-surface p-6 space-y-8">
+                    <section>
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xs font-black uppercase tracking-widest text-gray-400">Store Profile</h3>
+                            <div class="flex gap-2">
+                                <span class="preset-chip" onclick="applyPreset(50, 10)">Startup</span>
+                                <span class="preset-chip active" id="proChip" onclick="applyPreset(125, 15)">Pro</span>
+                                <span class="preset-chip" onclick="applyPreset(300, 12)">Elite</span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="stat-label mb-3 block">Service Plan Selection</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="plan-card" data-value="40" onclick="selectPlan(this)">
+                                        <span class="block text-lg font-black">$40</span>
+                                        <span class="plan-name">Base</span>
+                                    </div>
+                                    <div class="plan-card active" data-value="50" onclick="selectPlan(this)">
+                                        <span class="block text-lg font-black">$50</span>
+                                        <span class="plan-name">Total</span>
+                                    </div>
+                                    <div class="plan-card" data-value="60" onclick="selectPlan(this)">
+                                        <span class="block text-lg font-black">$60</span>
+                                        <span class="plan-name">5G+</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="stat-label mb-2 block flex items-center justify-between">
+                                    Monthly Sales (PSA)
+                                    <input type="number" id="psaInput" value="125" min="1" max="1000" oninput="syncPSA(this.value, 'slider')">
+                                </label>
+                                <input type="range" id="psaSlider" min="10" max="500" value="125" step="5" oninput="syncPSA(this.value, 'input')" class="w-full opacity-80 accent-total-red">
+                            </div>
+
+                            <div class="bg-gray-900/50 p-4 rounded-xl border border-gray-800 transition-all hover:border-gray-600">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div>
+                                        <label class="stat-label block text-white">2025 Perfect Sale Metric</label>
+                                        <p class="text-[9px] text-gray-500 font-bold uppercase tracking-tight">3-Month Replenishment Target</p>
+                                    </div>
+                                    <label class="switch">
+                                        <input type="checkbox" id="perfectSaleToggle" checked onchange="runCalculation()">
+                                        <span class="slider"></span>
+                                    </label>
+                                </div>
+                                <div id="perfectSaleHint" class="text-[10px] text-total-ice font-bold mt-2 flex items-center gap-1">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                    EARNING EXTRA $10/ACT [2025 PLAN]
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t border-gray-800">
+                                <div class="flex justify-between items-end mb-2 relative group">
+                                    <label class="stat-label text-gray-500 cursor-help border-b border-dotted border-gray-600">Projected Churn Rate</label>
+                                    
+                                    <!-- Tooltip explanation for Churn -->
+                                    <div class="absolute bottom-full left-0 mb-3 hidden group-hover:block w-64 p-3 bg-[#1e293b] border border-gray-700 text-[10px] text-gray-300 rounded-lg shadow-2xl z-50 leading-relaxed pointer-events-none">
+                                        <strong class="text-total-ice block mb-1">What is Churn Rate?</strong>
+                                        The percentage of customers who stop service each month. In this model, churn reduces your subscriber base, which directly affects your <span class="text-total-red">Stacked Retention Spiffs</span> and Monthly Residuals.
+                                    </div>
+                                    
+                                    <span class="text-xs font-bold text-gray-500" id="churnDisplay">15%</span>
+                                </div>
+                                <input type="range" id="churn" min="0" max="40" value="15" oninput="runCalculation()" class="w-full opacity-30">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Education Card: 425% Logic -->
+                <div class="card-surface p-6 brand-gradient border-none relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h4 class="text-[10px] font-black uppercase text-total-ice tracking-widest mb-4">Dealer Education</h4>
+                        <p class="text-lg font-black italic mb-4 leading-tight text-white">The 425% MRC <br>Spiff Breakdown</p>
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-[9px] font-bold uppercase text-white/70 mb-1">Cumulative Value (6 Months)</p>
+                                <div class="stack-bar">
+                                    <div class="stack-segment bg-total-red" style="width: 12%"></div>
+                                    <div class="stack-segment bg-total-ice" style="width: 88%"></div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4 mt-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 rounded-full bg-total-red"></div>
+                                        <span class="text-[9px] font-bold text-white uppercase italic">50% MRC (Mo 1)</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-2 h-2 rounded-full bg-total-ice"></div>
+                                        <span class="text-[9px] font-bold text-white uppercase italic">375% MRC (Mo 2-6)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Panel: Dashboard -->
+            <div class="lg:col-span-8 space-y-8">
+                
+                <!-- Primary KPIs -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="card-surface p-6 border-b-4 border-total-ice ice-glow">
+                        <p class="stat-label mb-2">6-Mo Value / Act</p>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-xl font-bold text-total-ice">$</span>
+                            <p class="stat-value text-3xl font-black tracking-tighter" id="statPerAct">0</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-800">
+                            <p class="stat-detail">Considered in Calculation:</p>
+                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed">
+                                • 50% Upfront Spiff<br>
+                                • 375% Stacked Retention<br>
+                                • 17% Airtime Rev-Share<br>
+                                • Device Margin & Perfect Sale
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card-surface p-6 border-b-4 border-total-red">
+                        <p class="stat-label mb-2">Mo. 6 Monthly Payout</p>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-xl font-bold text-total-red">$</span>
+                            <p class="stat-value text-3xl font-black tracking-tighter" id="statM6">0</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-800">
+                            <p class="stat-detail">Considered in Calculation:</p>
+                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed">
+                                • Current Month Instant Spiff<br>
+                                • <span class="text-total-red">Stacked Retention</span> (M2-M6)<br>
+                                • Base Residuals & Airtime<br>
+                                • PSA Volume x Achievement
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card-surface p-6 brand-gradient border-b-4 border-total-ice shadow-2xl relative overflow-hidden group">
+                        <div class="relative z-10">
+                            <p class="stat-label mb-2 text-total-ice/80">Year 1 Cumulative</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-xl font-bold text-total-ice">$</span>
+                                <p class="stat-value text-3xl font-black tracking-tighter text-white" id="statYear">0</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-white/10">
+                                <p class="stat-detail text-white/60">Considered in Calculation:</p>
+                                <p class="text-[9px] text-white/40 mt-1 leading-relaxed">
+                                    • 12-Month Aggregate Revenue<br>
+                                    • Continuous Growth Model<br>
+                                    • All Spiff Tiers Combined<br>
+                                    • Net after Estimated Churn
+                                </p>
+                            </div>
+                        </div>
+                        <div class="absolute -right-4 -bottom-4 text-white opacity-5 text-4xl font-black uppercase tracking-tighter">PARAMOUNT</div>
+                    </div>
+                </div>
+
+                <!-- Projection Chart -->
+                <div class="card-surface p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                        <div>
+                            <h3 class="text-sm font-black uppercase tracking-widest text-total-ice">Wealth Stack Projection</h3>
+                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-tight italic">Estimated growth of stacked commissions</p>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-total-red shadow-[0_0_10px_#ed1c24]"></span>
+                                <span class="text-[10px] font-black uppercase text-gray-400 tracking-tighter">Monthly Income</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-total-ice shadow-[0_0_10px_#00a3e0]"></span>
+                                <span class="text-[10px] font-black uppercase text-gray-400 tracking-tighter">Subscriber Base</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-[340px]">
+                        <canvas id="compChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Performance Roadmap - Adjusted for high readability numbers -->
+                <div class="card-surface overflow-hidden">
+                    <div class="p-4 border-b border-gray-800 bg-gray-900/30">
+                        <h3 class="text-xs font-black uppercase tracking-[0.2em] text-total-ice">Performance Roadmap</h3>
+                        <p class="text-[9px] text-gray-500 font-bold uppercase mt-1 italic">12-Month Financial Projection</p>
+                    </div>
+                    <div class="w-full">
+                        <table class="roadmap-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-left px-4 w-28">Period</th>
+                                    <th class="text-right px-2 w-16">Subs</th>
+                                    <th class="text-right px-2">Instant</th>
+                                    <th class="text-right px-2">Retention</th>
+                                    <th class="text-right px-2">Residuals</th>
+                                    <th class="text-right px-4">Net Payout</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let chartInstance = null;
+        let selectedPlanValue = 50;
+
+        function syncPSA(val, targetType) {
+            const numVal = parseInt(val) || 0;
+            if (targetType === 'input') {
+                document.getElementById('psaInput').value = numVal;
+            } else {
+                document.getElementById('psaSlider').value = numVal;
+            }
+            runCalculation();
+        }
+
+        function applyPreset(psa, churn) {
+            document.getElementById('psaSlider').value = psa;
+            document.getElementById('psaInput').value = psa;
+            document.getElementById('churn').value = churn;
+            document.querySelectorAll('.preset-chip').forEach(c => c.classList.remove('active'));
+            runCalculation();
+        }
+
+        function selectPlan(element) {
+            document.querySelectorAll('.plan-card').forEach(card => card.classList.remove('active'));
+            element.classList.add('active');
+            selectedPlanValue = parseFloat(element.getAttribute('data-value'));
+            runCalculation();
+        }
+
+        function runCalculation() {
+            const monthlyPSA = parseInt(document.getElementById('psaInput').value) || 0;
+            
+            const planPrice = selectedPlanValue;
+            const perfectSaleHit = document.getElementById('perfectSaleToggle').checked;
+            const churnRate = parseInt(document.getElementById('churn').value) / 100;
+            
+            document.getElementById('churnDisplay').innerText = (churnRate * 100).toFixed(0) + '%';
+            document.getElementById('perfectSaleHint').style.display = perfectSaleHit ? 'flex' : 'none';
+
+            const SPIFF_M1 = 0.50;      // 50% Month 1
+            const SPIFF_RET = 0.75;     // 75% Months 2-6
+            const AIRTIME_TOTAL = 0.17; // 8.5% Airtime + 8.5% Autopay
+            const RESIDUAL = 0.03;      // 3%
+            const PERFECT_SALE_VAL = perfectSaleHit ? 10.00 : 0.00;
+            const DEVICE_MARGIN = 10.00;
+
+            let data = [];
+            let cumulativeComp = 0;
+            let cohorts = new Array(12).fill(0);
+            
+            for (let m = 0; m < 12; m++) {
+                cohorts[m] = monthlyPSA;
+                let monthlyInstant = monthlyPSA * ( (planPrice * SPIFF_M1) + PERFECT_SALE_VAL + DEVICE_MARGIN );
+                let monthlyRetention = 0;
+                let monthlyResid = 0;
+                let currentActive = 0;
+
+                for (let prev = 0; prev <= m; prev++) {
+                    let monthsOld = m - prev;
+                    let survivors = cohorts[prev] * Math.pow(1 - churnRate, monthsOld);
+                    currentActive += survivors;
+                    if (monthsOld >= 1 && monthsOld <= 5) monthlyRetention += survivors * (planPrice * SPIFF_RET);
+                    monthlyResid += survivors * (planPrice * (AIRTIME_TOTAL + RESIDUAL));
+                }
+
+                let total = monthlyInstant + monthlyRetention + monthlyResid;
+                cumulativeComp += total;
+
+                data.push({
+                    month: m + 1,
+                    activeBase: Math.round(currentActive),
+                    instant: monthlyInstant,
+                    retention: monthlyRetention,
+                    resid: monthlyResid,
+                    total: total
+                });
+            }
+
+            updateUI(data, cumulativeComp);
+        }
+
+        function updateUI(data, cumulativeComp) {
+            const m6 = data[5];
+            const m1_total = data[0].total;
+            const plan = selectedPlanValue;
+            const perfectHit = document.getElementById('perfectSaleToggle').checked;
+            const perfectVal = perfectHit ? 10 : 0;
+            const valPerAct = (plan * 0.5) + (plan * 0.75 * 5) + perfectVal + 10 + (plan * 0.17 * 6);
+
+            document.getElementById('statPerAct').innerText = Math.round(valPerAct).toLocaleString();
+            document.getElementById('statM6').innerText = Math.round(m6.total).toLocaleString();
+            document.getElementById('statYear').innerText = Math.round(cumulativeComp).toLocaleString();
+
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = "roadmap-row";
+                
+                let tag = "";
+                if (row.month === 1) tag = `<br><span class="milestone-tag">Launch</span>`;
+                if (row.month === 6) tag = `<br><span class="milestone-tag" style="background:var(--total-ice)">Peak</span>`;
+                
+                let growth = "";
+                if (row.month > 1) {
+                    let pct = ((row.total - m1_total) / m1_total * 100).toFixed(0);
+                    growth = `<br><span class="growth-badge">+${pct}%</span>`;
+                }
+
+                tr.innerHTML = `
+                    <td class="px-4 py-4">
+                        <span class="font-black text-gray-500 italic text-sm">M${row.month < 10 ? '0'+row.month : row.month}</span>
+                        ${tag}
+                    </td>
+                    <td class="px-2 py-4 text-right">
+                        <span class="font-bold text-white text-[0.9rem]">${row.activeBase.toLocaleString()}</span>
+                    </td>
+                    <td class="px-2 py-4 text-right text-gray-300 font-bold text-[0.9rem]">$${Math.round(row.instant).toLocaleString()}</td>
+                    <td class="px-2 py-4 text-right text-gray-300 font-bold text-[0.9rem]">$${Math.round(row.retention).toLocaleString()}</td>
+                    <td class="px-2 py-4 text-right text-gray-300 font-bold text-[0.9rem]">$${Math.round(row.resid).toLocaleString()}</td>
+                    <td class="px-4 py-4 text-right">
+                        <span class="font-black text-total-ice text-base">$${Math.round(row.total).toLocaleString()}</span>
+                        ${growth}
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            renderChart(data);
+        }
+
+        function renderChart(data) {
+            const ctx = document.getElementById('compChart').getContext('2d');
+            if (chartInstance) chartInstance.destroy();
+            
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(237, 28, 36, 0.4)');
+            gradient.addColorStop(1, 'rgba(237, 28, 36, 0)');
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(d => 'Mo ' + d.month),
+                    datasets: [{
+                        label: 'Monthly Payout',
+                        data: data.map(d => d.total),
+                        borderColor: '#ed1c24',
+                        borderWidth: 4,
+                        fill: true,
+                        backgroundColor: gradient,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#ed1c24',
+                        yAxisID: 'y'
+                    }, {
+                        label: 'Subs',
+                        data: data.map(d => d.activeBase),
+                        borderColor: '#00a3e0',
+                        borderWidth: 3,
+                        borderDash: [5, 5],
+                        fill: false,
+                        yAxisID: 'y1',
+                        pointRadius: 4,
+                        pointBackgroundColor: '#00a3e0'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { 
+                            ticks: { color: '#4b5563', font: { weight: 'bold', size: 10 } }, 
+                            grid: { display: false } 
+                        },
+                        y: { 
+                            position: 'left',
+                            ticks: { color: '#ffffff', font: { weight: 'bold', size: 10 }, callback: v => '$' + v.toLocaleString() }, 
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' } 
+                        },
+                        y1: { 
+                            position: 'right',
+                            display: true,
+                            ticks: { color: '#00a3e0', font: { weight: 'bold', size: 10 }, callback: v => v.toLocaleString() },
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = runCalculation;
+    </script>
+</body>
+</html>
