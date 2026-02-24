@@ -129,7 +129,7 @@
         .edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
         .edu-indicator.active { background: var(--total-ice); width: 20px; }
 
-        /* --- DESIGNER PRINT ENGINE: ONE PAGE PROFESSIONAL REPORT --- */
+        /* --- PDF DESIGNER ENGINE: PREMIUM ONE-PAGE REPORT --- */
         @media print {
             @page { 
                 size: letter portrait; 
@@ -150,39 +150,39 @@
             .max-w-7xl {
                 max-width: 100% !important;
                 margin: 0 auto !important;
-                padding: 0.4in 0.8in !important; /* Elegant side margins */
-                zoom: 0.82; 
+                padding: 0.8in 0.85in 0.4in 0.85in !important; /* Fixed: Logo padding from top edge */
+                zoom: 0.78; /* Scaled down slightly to ensure absolute 1-page fit */
             }
 
             .grid { display: block !important; }
             .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto 5px auto !important; }
 
-            /* Professional Centered Header */
+            /* Professional Centered Header - Designers Choice */
             .print-header {
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
-                margin-bottom: 20px !important;
-                padding-bottom: 10px !important;
-                border-bottom: 3px double #000 !important;
+                margin-bottom: 25px !important;
+                padding-bottom: 15px !important;
+                border-bottom: 4px double #000 !important; /* Elegant separator */
             }
-            .print-header img { height: 55px !important; margin-bottom: 10px !important; }
-            .print-header h1 { font-size: 20pt !important; color: #000 !important; margin: 0 !important; }
-            .print-header p { font-size: 8.5pt !important; color: #666 !important; letter-spacing: 0.2em !important; margin-top: 5px !important; }
+            .print-header img { height: 60px !important; margin-bottom: 12px !important; }
+            .print-header h1 { font-size: 22pt !important; color: #000 !important; margin: 0 !important; line-height: 1 !important; }
+            .print-header p { font-size: 9pt !important; color: #444 !important; letter-spacing: 0.25em !important; margin-top: 8px !important; }
 
             /* Compact Summary Bar */
             .print-summary-bar {
                 display: flex !important;
                 justify-content: center;
-                gap: 40px;
-                background: #f1f5f9 !important;
+                gap: 50px;
+                background: #f8fafc !important;
                 border: 1px solid #000 !important;
                 padding: 8px !important;
                 border-radius: 4px !important;
-                margin-bottom: 15px !important;
+                margin-bottom: 20px !important;
                 font-weight: 800 !important;
                 text-transform: uppercase !important;
-                font-size: 9.5pt !important;
+                font-size: 10pt !important;
                 color: #000 !important;
             }
 
@@ -191,33 +191,34 @@
                 display: grid !important; 
                 grid-template-columns: repeat(3, 1fr) !important; 
                 gap: 12px !important;
-                margin-bottom: 15px !important;
+                margin-bottom: 20px !important;
             }
             .kpi-card { 
                 background: #fff !important; 
                 border: 1.5px solid #000 !important; 
-                padding: 14px !important;
+                padding: 16px !important;
                 text-align: center !important;
             }
-            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 4px !important; font-size: 7.5pt !important; }
-            .stat-value { color: black !important; font-size: 22pt !important; font-weight: 900 !important; }
+            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 4px !important; font-size: 8pt !important; }
+            .stat-value { color: black !important; font-size: 24pt !important; font-weight: 900 !important; }
 
             /* Elegant Chart Scaling */
-            .graph-container { margin-bottom: 20px !important; }
+            .graph-container { margin-bottom: 25px !important; }
             canvas { max-height: 280px !important; width: 100% !important; }
 
             /* High-Contrast Professional Roadmap */
             .roadmap-table { width: 100% !important; margin: 0 auto !important; border: 1.5px solid #000 !important; border-collapse: collapse !important; }
-            .roadmap-table th { background: #f1f5f9 !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 5px !important; font-size: 8pt !important; }
+            .roadmap-table th { background: #f1f5f9 !important; color: #000 !important; border-bottom: 2px solid #000 !important; padding: 6px !important; font-size: 9pt !important; }
             
             .roadmap-row td { 
-                padding: 5px !important; 
+                padding: 6px !important; 
                 border-bottom: 1px solid #ddd !important; 
-                font-size: 9pt !important; 
-                color: #1a1a1a !important; /* Sharp black text */
+                font-size: 9.5pt !important; 
+                color: #111827 !important; /* Sharp high-contrast charcoal */
                 font-weight: 600 !important;
             }
-            .roadmap-row td span { color: #1a1a1a !important; } /* Fix whitewash */
+            /* Override dim spans for print */
+            .roadmap-row td span, .roadmap-row td p { color: #111827 !important; opacity: 1 !important; }
             .roadmap-row td .text-total-ice { color: #002d72 !important; font-weight: 900 !important; }
 
             .card-surface { border: 1px solid #e2e8f0 !important; background: #fff !important; box-shadow: none !important; }
@@ -482,7 +483,7 @@
             const churnRate = parseInt(document.getElementById('churn').value) / 100;
             document.getElementById('churnDisplay').innerText = (churnRate * 100).toFixed(0) + '%';
 
-            // PDF Sync
+            // PDF/Print Sync
             document.getElementById('p-psa').innerText = monthlyPSA;
             document.getElementById('p-plan').innerText = '$' + planPrice;
             document.getElementById('p-churn').innerText = (churnRate * 100).toFixed(0) + '%';
