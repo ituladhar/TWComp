@@ -53,7 +53,7 @@
         ::-webkit-scrollbar-track { background: var(--total-dark); }
         ::-webkit-scrollbar-thumb { background: var(--total-border); border-radius: 10px; }
 
-        /* Component Classes */
+        /* Card Surfaces */
         .card-surface {
             background-color: var(--total-panel);
             border: 1px solid var(--total-border);
@@ -113,7 +113,7 @@
             line-height: 1.5;
         }
 
-        /* Input Styling */
+        /* Inputs */
         input[type="number"] {
             background-color: #0a1118;
             border: 2px solid var(--total-border);
@@ -129,7 +129,7 @@
             -moz-appearance: textfield; 
         }
 
-        /* Roadmap Table Styling */
+        /* Roadmap Table */
         .roadmap-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
         .roadmap-table th {
             background: rgba(0,0,0,0.5);
@@ -153,7 +153,7 @@
             background: rgba(0, 163, 224, 0.1); color: var(--total-ice);
         }
 
-        /* Intel Deck */
+        /* Intelligence Deck */
         .edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; transition: all 0.3s; }
         .edu-indicator.active { background: var(--total-ice); width: 20px; }
         .stack-bar { height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; display: flex; }
@@ -189,7 +189,7 @@
     <div class="max-w-7xl mx-auto px-6 py-8 pb-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <!-- Sidebar / Controls -->
+            <!-- Sidebar -->
             <div class="lg:col-span-4 space-y-6">
                 <div class="card-surface p-6 space-y-8">
                     <section>
@@ -206,11 +206,11 @@
                             <div>
                                 <label class="stat-label mb-3 block">Choose Plan</label>
                                 <div class="grid grid-cols-3 gap-2">
-                                    <div class="plan-card" data-value="40" onclick="selectPlan(40, this)">
+                                    <div class="plan-card active" data-value="40" onclick="selectPlan(40, this)">
                                         <span class="block text-lg font-black">$40</span>
                                         <span class="plan-name text-[10px] uppercase font-bold text-gray-500">Base</span>
                                     </div>
-                                    <div class="plan-card active" data-value="50" onclick="selectPlan(50, this)">
+                                    <div class="plan-card" data-value="50" onclick="selectPlan(50, this)">
                                         <span class="block text-lg font-black">$50</span>
                                         <span class="plan-name text-[10px] uppercase font-bold text-gray-500">Total</span>
                                     </div>
@@ -237,8 +237,8 @@
                                             <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
                                         </svg>
                                     </label>
-                                    <div class="absolute bottom-full left-0 mb-3 hidden group-hover:block w-64 p-3 bg-[#1e293b] border border-gray-700 text-[10px] text-gray-300 rounded-lg shadow-2xl z-50 leading-relaxed italic pointer-events-none">
-                                        <strong class="text-total-ice block mb-1 uppercase font-black not-italic">What is Churn Rate?</strong>
+                                    <div class="absolute bottom-full left-0 mb-3 hidden group-hover:block w-64 p-3 bg-[#1e293b] border border-gray-700 text-[10px] text-gray-300 rounded-lg shadow-2xl z-50 leading-relaxed pointer-events-none italic">
+                                        <strong class="text-total-ice block mb-1 uppercase not-italic font-black">What is Churn Rate?</strong>
                                         The percentage of customers who stop service each month. This reduces your active base and lowers your <span class="text-total-red font-bold">Stay Bonus</span> payments.
                                     </div>
                                     <span class="text-base font-black text-gray-400" id="churnDisplay">15%</span>
@@ -261,11 +261,11 @@
                 </div>
             </div>
 
-            <!-- Dashboard Content -->
+            <!-- Main Panel -->
             <div class="lg:col-span-8 space-y-8">
                 <!-- KPIs -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="card-surface kpi-card ice-glow p-6 border-b-4 border-total-ice">
+                    <div class="card-surface kpi-card ice-glow p-6 border-b-4 border-total-ice cursor-default">
                         <p class="stat-label mb-2">Total Value Per Sale</p>
                         <div class="flex items-baseline gap-1">
                             <span class="text-xl font-bold text-total-ice">$</span>
@@ -274,12 +274,12 @@
                         <div class="mt-4 pt-3 border-t border-gray-800">
                             <p class="stat-detail">Considered in Calculation:</p>
                             <p class="text-[9px] text-gray-500 mt-1 leading-relaxed uppercase">
-                                • 50% Upfront Spiff • 375% Stacked Retention • 17% Airtime Share
+                                • 50% Upfront Spiff • 375% Stacked Retention • 17% Airtime Rev-Share
                             </p>
                         </div>
                     </div>
 
-                    <div class="card-surface kpi-card red-glow p-6 border-b-4 border-total-red">
+                    <div class="card-surface kpi-card red-glow p-6 border-b-4 border-total-red cursor-default">
                         <p class="stat-label mb-2">Month 6 Paycheck</p>
                         <div class="flex items-baseline gap-1">
                             <span class="text-xl font-bold text-total-red">$</span>
@@ -293,7 +293,7 @@
                         </div>
                     </div>
 
-                    <div class="card-surface kpi-card ice-glow brand-gradient p-6 border-b-4 border-total-ice shadow-2xl relative overflow-hidden group">
+                    <div class="card-surface kpi-card ice-glow brand-gradient p-6 border-b-4 border-total-ice shadow-2xl relative overflow-hidden group cursor-default">
                         <div class="relative z-10">
                             <p class="stat-label mb-2 text-total-ice/80">Total 1-Year Profit</p>
                             <div class="flex items-baseline gap-1">
@@ -310,7 +310,7 @@
                     </div>
                 </div>
 
-                <!-- Visualization -->
+                <!-- Projection Chart -->
                 <div class="card-surface p-8">
                     <h3 class="text-sm font-black uppercase tracking-widest text-total-ice italic">Money Growth Plan</h3>
                     <p class="text-[10px] text-gray-500 font-bold uppercase tracking-tight mb-8">How your monthly check grows over 1 year</p>
@@ -319,7 +319,7 @@
                     </div>
                 </div>
 
-                <!-- Performance Table -->
+                <!-- Performance Roadmap -->
                 <div class="card-surface overflow-hidden">
                     <div class="p-8 pb-4 border-b border-gray-800 bg-gray-900/40">
                         <h3 class="text-sm font-black uppercase tracking-widest text-total-ice italic">Performance Roadmap</h3>
@@ -333,8 +333,8 @@
                                     <th class="text-right px-4 w-[12%]">Lines</th>
                                     <th class="text-right px-4 w-[16%]">Quick Cash</th>
                                     <th class="text-right px-4 w-[16%]">Stay Bonus</th>
-                                    <th class="text-right px-4 w-[18%]">Monthly $</th>
-                                    <th class="text-right pr-10 w-[20%]">Total Check</th>
+                                    <th class="text-right pr-12 w-[16%]">Monthly $</th>
+                                    <th class="text-left pl-10 w-[22%]">Total Check</th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody"></tbody>
@@ -356,8 +356,9 @@
     </div>
 
     <script>
+        /** BUSINESS LOGIC ENGINE **/
         let chartInstance = null;
-        let selectedPlanValue = 50;
+        let selectedPlanValue = 40;
         let eduSlideIndex = 0;
 
         const eduSlides = [
@@ -416,7 +417,6 @@
                 cohorts[m] = psa;
                 let instant = psa * ((price * spiffM1) + deviceMargin);
                 let retention = 0, residuals = 0, currentActive = 0;
-                
                 for (let prev = 0; prev <= m; prev++) {
                     let age = m - prev;
                     let survivors = cohorts[prev] * Math.pow(1 - churn, age);
@@ -424,7 +424,6 @@
                     if (age >= 1 && age <= 5) retention += survivors * (price * spiffRet);
                     residuals += survivors * (price * (airtime + residBase));
                 }
-                
                 let total = instant + retention + residuals;
                 cumulative += total;
                 data.push({ month: m + 1, activeBase: Math.round(currentActive), instant, retention, residuals, total });
@@ -433,9 +432,8 @@
         }
 
         function updateUI(data, cumulative) {
-            const m6 = data[5];
             document.getElementById('statPerAct').innerText = Math.round((selectedPlanValue * 0.5) + (selectedPlanValue * 0.75 * 5) + 10 + (selectedPlanValue * 0.17 * 6)).toLocaleString();
-            document.getElementById('statM6').innerText = Math.round(m6.total).toLocaleString();
+            document.getElementById('statM6').innerText = Math.round(data[5].total).toLocaleString();
             document.getElementById('statYear').innerText = Math.round(cumulative).toLocaleString();
             
             const tbody = document.getElementById('tableBody');
@@ -445,14 +443,13 @@
                 tr.className = "roadmap-row";
                 let tag = row.month === 1 ? `<span class="milestone-tag">Launch</span>` : (row.month === 6 ? `<span class="milestone-tag" style="background:var(--total-ice)">Peak</span>` : "");
                 let growth = row.month > 1 ? `<span class="growth-badge">+${((row.total - data[0].total) / data[0].total * 100).toFixed(0)}%</span>` : "";
-                
                 tr.innerHTML = `
                     <td class="px-8 py-3"><div class="flex flex-col"><span class="font-black text-slate-500 italic text-[11px] uppercase leading-none">Month ${row.month < 10 ? '0'+row.month : row.month}</span>${tag}</div></td>
                     <td class="px-4 py-3 text-right text-white font-bold text-[14px]">${row.activeBase.toLocaleString()}</td>
                     <td class="px-4 py-3 text-right text-slate-400 font-medium text-[14px]">$${Math.round(row.instant).toLocaleString()}</td>
                     <td class="px-4 py-3 text-right text-slate-400 font-medium text-[14px]">$${Math.round(row.retention).toLocaleString()}</td>
-                    <td class="px-4 py-3 text-right text-slate-400 font-medium text-[14px]">$${Math.round(row.residuals).toLocaleString()}</td>
-                    <td class="pr-10 py-3 text-right"><div class="flex flex-col items-end"><span class="font-black text-total-ice text-[16px] leading-tight">$${Math.round(row.total).toLocaleString()}</span>${growth}</div></td>
+                    <td class="pr-12 py-3 text-right text-slate-400 font-medium text-[14px]">$${Math.round(row.residuals).toLocaleString()}</td>
+                    <td class="pl-10 py-3 text-left"><div class="flex flex-col items-start"><span class="font-black text-total-ice text-[16px] leading-tight">$${Math.round(row.total).toLocaleString()}</span>${growth}</div></td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -469,7 +466,7 @@
                 data: {
                     labels: data.map(d => 'Month ' + d.month),
                     datasets: [
-                        { label: 'Check Total', data: data.map(d => d.total), borderColor: '#ed1c24', borderWidth: 4, fill: true, backgroundColor: gradient, tension: 0.4, yAxisID: 'y' },
+                        { label: 'Total', data: data.map(d => d.total), borderColor: '#ed1c24', borderWidth: 4, fill: true, backgroundColor: gradient, tension: 0.4, yAxisID: 'y' },
                         { label: 'Lines', data: data.map(d => d.activeBase), borderColor: '#00a3e0', borderWidth: 2, borderDash: [5, 5], fill: false, yAxisID: 'y1' }
                     ]
                 },
