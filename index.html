@@ -5,17 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Paramount | Partner Growth Dashboard</title>
     
-    <!-- External CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    
-    <!-- CDN Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body class="min-h-screen">
 
@@ -41,7 +37,6 @@
     <div class="max-w-7xl mx-auto px-6 py-8 pb-12">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <!-- Sidebar -->
             <div class="lg:col-span-4 space-y-6">
                 <div class="card-surface p-6 space-y-8">
                     <section>
@@ -91,7 +86,7 @@
                                     </label>
                                     <div class="absolute bottom-full left-0 mb-3 hidden group-hover:block w-64 p-3 bg-[#1e293b] border border-gray-700 text-[10px] text-gray-300 rounded-lg shadow-2xl z-50 leading-relaxed pointer-events-none italic no-print">
                                         <strong class="text-total-ice block mb-1 uppercase not-italic font-black">What is Churn Rate?</strong>
-                                        The percentage of customers who stop service each month. This reduces your active base and lowers your <span class="text-total-red font-bold">Stay Bonus</span> payments.
+                                        The percentage of customers who stop service each month.
                                     </div>
                                     <span class="text-base font-black text-gray-400" id="churnDisplay">15%</span>
                                 </div>
@@ -101,7 +96,6 @@
                     </section>
                 </div>
 
-                <!-- Strategic Growth Intelligence Deck -->
                 <div class="card-surface p-6 brand-gradient border-none relative overflow-hidden min-h-[280px] flex flex-col justify-between shadow-2xl">
                     <div id="eduContent"></div>
                     <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/10 no-print">
@@ -113,10 +107,7 @@
                 </div>
             </div>
 
-            <!-- Main Panel -->
             <div class="lg:col-span-8 space-y-8">
-                
-                <!-- Primary KPIs -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <div class="card-surface kpi-card ice-glow p-6 border-b-4 border-total-ice cursor-default">
                         <p class="stat-label mb-2">Total Value Per Sale</p>
@@ -124,34 +115,14 @@
                             <span class="text-xl font-bold text-total-ice">$</span>
                             <p class="stat-value text-3xl font-black tracking-tighter" id="statPerAct">0</p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-gray-800">
-                            <p class="stat-detail">Considered in Calculation:</p>
-                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed uppercase">
-                                • 50% Upfront Spiff<br>
-                                • 375% Stacked Retention<br>
-                                • 17% Airtime Rev-Share<br>
-                                • Device Margin Estimates
-                            </p>
-                        </div>
                     </div>
-
                     <div class="card-surface kpi-card red-glow p-6 border-b-4 border-total-red cursor-default">
                         <p class="stat-label mb-2">Month 6 Paycheck</p>
                         <div class="flex items-baseline gap-1">
                             <span class="text-xl font-bold text-total-red">$</span>
                             <p class="stat-value text-3xl font-black tracking-tighter" id="statM6">0</p>
                         </div>
-                        <div class="mt-4 pt-3 border-t border-gray-800">
-                            <p class="stat-detail">Considered in Calculation:</p>
-                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed uppercase">
-                                • Current Month Instant Spiff<br>
-                                • <span class="text-total-red">Stacked M2-M6 Bonus</span><br>
-                                • Base Residuals & Airtime<br>
-                                • Sale Volume x Achievement
-                            </p>
-                        </div>
                     </div>
-
                     <div class="card-surface kpi-card ice-glow brand-gradient p-6 border-b-4 border-total-ice shadow-2xl relative overflow-hidden group cursor-default">
                         <div class="relative z-10">
                             <p class="stat-label mb-2 text-total-ice/80">Total 1-Year Profit</p>
@@ -159,80 +130,35 @@
                                 <span class="text-xl font-bold text-total-ice">$</span>
                                 <p class="stat-value text-3xl font-black tracking-tighter text-white" id="statYear">0</p>
                             </div>
-                            <div class="mt-4 pt-3 border-t border-white/10">
-                                <p class="stat-detail text-white/60">Considered in Calculation:</p>
-                                <p class="text-[9px] text-white/40 mt-1 leading-relaxed uppercase">
-                                    • 12-Month Aggregate Revenue<br>
-                                    • Continuous Growth Model<br>
-                                    • All Bonus Tiers Combined<br>
-                                    • Net after Estimated Losses
-                                </p>
-                            </div>
                         </div>
-                        <div class="absolute -right-4 -bottom-4 text-white opacity-5 text-4xl font-black uppercase tracking-tighter no-print">PARAMOUNT</div>
                     </div>
                 </div>
 
-                <!-- Projection Chart -->
                 <div class="card-surface p-8">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                        <div>
-                            <h3 class="text-sm font-black uppercase tracking-widest text-total-ice italic">Money Growth Plan</h3>
-                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-tight">How your monthly check grows over 1 year</p>
-                        </div>
-                        <div class="flex gap-4 no-print">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-total-red shadow-[0_0_10px_#ed1c24]"></span>
-                                <span class="text-[10px] font-black uppercase text-gray-400 tracking-tighter">Monthly Pay</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-total-ice shadow-[0_0_10px_#00a3e0]"></span>
-                                <span class="text-[10px] font-black uppercase text-gray-400 tracking-tighter">Total Lines</span>
-                            </div>
-                        </div>
-                    </div>
                     <div class="h-[340px] print:h-[220px]">
                         <canvas id="compChart"></canvas>
                     </div>
                 </div>
 
-                <!-- Performance Roadmap -->
                 <div class="card-surface overflow-hidden">
-                    <div class="p-8 pb-4 border-b border-gray-800 bg-gray-900/40">
-                        <h3 class="text-sm font-black uppercase tracking-widest text-total-ice italic">Performance Roadmap</h3>
-                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-tight">12-Month Money Projection</p>
-                    </div>
-                    <div class="w-full">
-                        <table class="roadmap-table">
-                            <thead>
-                                <tr>
-                                    <th class="text-left px-8 w-[18%]"></th>
-                                    <th class="text-right px-4 w-[12%]">Lines</th>
-                                    <th class="text-right px-4 w-[16%]">Quick Cash</th>
-                                    <th class="text-right px-4 w-[16%]">Stay Bonus</th>
-                                    <th class="text-right px-4 w-[18%]">Monthly $</th>
-                                    <th class="text-right pr-10 w-[20%]">Total Check</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tableBody"></tbody>
-                        </table>
-                    </div>
+                    <table class="roadmap-table">
+                        <thead>
+                            <tr>
+                                <th class="text-left px-8 w-[18%]">Month</th>
+                                <th class="text-right px-4 w-[12%]">Lines</th>
+                                <th class="text-right px-4 w-[16%]">Quick Cash</th>
+                                <th class="text-right px-4 w-[16%]">Stay Bonus</th>
+                                <th class="text-right px-4 w-[18%]">Monthly $</th>
+                                <th class="text-right pr-10 w-[20%]">Total Check</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
-        <!-- Disclaimer -->
-        <div class="mt-12 pt-8 border-t border-gray-800/50 text-center">
-            <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 flex items-center justify-center gap-2 italic">
-                <span class="text-total-red not-italic">⚠️</span> Disclaimer
-            </p>
-            <p class="text-[10px] text-gray-600 uppercase leading-relaxed max-w-2xl mx-auto font-bold tracking-tight italic">
-                Predictive model only. Actual earnings vary and are subject to carrier audit, plan eligibility, and policy changes.
-            </p>
-        </div>
     </div>
 
-    <!-- External JS Files -->
     <script src="js/main.js"></script>
     <script src="js/export-controller.js"></script>
 </body>
