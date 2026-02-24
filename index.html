@@ -65,7 +65,6 @@
             box-shadow: 0 10px 20px -10px rgba(237, 28, 36, 0.2);
         }
 
-        /* Preset Chips Color Correction */
         .preset-chip {
             background: var(--total-border);
             padding: 6px 14px;
@@ -75,7 +74,7 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s;
-            color: #94a3b8; /* Slate gray/blue theme */
+            color: #94a3b8;
         }
         .preset-chip.active { 
             background: var(--total-ice); 
@@ -103,7 +102,6 @@
             letter-spacing: 0.12em;
         }
 
-        /* Updated PSA Input: Bolder and No Arrows */
         input[type="number"] {
             background-color: #0a1118;
             border: 1px solid var(--total-border);
@@ -111,7 +109,7 @@
             padding: 10px;
             color: var(--total-ice);
             font-weight: 900;
-            font-size: 2rem; /* Much larger */
+            font-size: 2rem; 
             width: 140px; 
             text-align: center;
             outline: none;
@@ -126,13 +124,12 @@
         .roadmap-table th { background: rgba(0,0,0,0.3); padding: 1rem 0.75rem; font-size: 0.65rem; text-transform: uppercase; color: #64748b; border-bottom: 2px solid var(--total-border); }
         .roadmap-row { transition: all 0.2s ease; border-bottom: 1px solid rgba(255,255,255,0.03); }
 
-        /* Intelligence Deck Styling */
         #eduContent { transition: opacity 0.4s ease-in-out; }
         .edu-fade { opacity: 0; }
         .edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
         .edu-indicator.active { background: var(--total-ice); width: 20px; }
 
-        /* --- ADVANCED PRINT ENGINE: ONE PAGE ONLY --- */
+        /* --- ENHANCED PRINT ENGINE: ONE PAGE PERFECTED --- */
         @media print {
             @page { 
                 size: letter portrait; 
@@ -150,68 +147,82 @@
                 overflow: hidden !important;
             }
 
-            /* Main Centered Container with wider gaps */
             .max-w-7xl {
                 max-width: 100% !important;
                 margin: 0 auto !important;
-                padding: 0.5in 0.75in !important; /* Proper PDF side gaps */
-                zoom: 0.8; /* Force everything to fit one page */
+                padding: 0.3in 0.6in !important; /* Reduced top padding to close header gap */
+                zoom: 0.85; 
             }
 
             .grid { display: block !important; }
-            .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto 10px auto !important; }
+            .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto 5px auto !important; }
 
-            /* Simple Summary Bar */
-            .print-summary-bar {
-                display: flex !important;
-                justify-content: center;
-                gap: 50px;
-                background: #f1f5f9 !important;
-                border: 2px solid #000 !important;
-                padding: 10px !important;
-                border-radius: 10px !important;
-                margin-bottom: 20px !important;
-                font-weight: 900 !important;
-                text-transform: uppercase !important;
-                font-size: 11pt !important;
-            }
-
-            /* Centered Headers from requested PDF style */
+            /* Centered Header with tight margins */
             .print-header {
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
-                margin-bottom: 20px !important;
-                border-bottom: 3px solid black !important;
-                padding-bottom: 10px !important;
+                margin-bottom: 10px !important; /* Narrowed gap */
+                border-bottom: 2px solid black !important;
+                padding-bottom: 5px !important;
+            }
+            .print-header img { height: 50px !important; margin-bottom: 5px !important; }
+
+            /* Narrow Summary Bar */
+            .print-summary-bar {
+                display: flex !important;
+                justify-content: center;
+                gap: 30px;
+                background: #f8fafc !important;
+                border: 1px solid #000 !important;
+                padding: 8px !important;
+                border-radius: 6px !important;
+                margin-bottom: 12px !important; /* Narrowed gap */
+                font-weight: 800 !important;
+                text-transform: uppercase !important;
+                font-size: 10pt !important;
+                color: #334155 !important;
             }
 
+            /* Optimized KPI Row */
             .kpi-row { 
                 display: grid !important; 
                 grid-template-columns: repeat(3, 1fr) !important; 
-                gap: 15px !important;
-                margin-bottom: 15px !important;
+                gap: 10px !important;
+                margin-bottom: 12px !important;
             }
             .kpi-card { 
                 background: #fff !important; 
-                border: 2px solid #000 !important; 
-                padding: 15px !important;
+                border: 1px solid #000 !important; 
+                padding: 12px !important;
                 text-align: center !important;
                 box-shadow: none !important;
             }
-            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 5px !important; font-size: 8pt !important; }
+            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 3px !important; font-size: 7.5pt !important; }
             .kpi-card .mt-4, .kpi-card .stat-detail { display: none !important; }
-            .stat-value { color: black !important; font-size: 24pt !important; line-height: 1 !important; }
+            .stat-value { color: black !important; font-size: 20pt !important; font-weight: 900 !important; }
 
-            /* Centered tight table */
-            .roadmap-table { width: 100% !important; margin: 0 auto !important; border: 1px solid #000 !important; border-collapse: collapse !important; }
-            .roadmap-table th { background: #e2e8f0 !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 4px !important; font-size: 8pt !important; }
-            .roadmap-row td { padding: 4px !important; border-bottom: 1px solid #cbd5e1 !important; font-size: 9pt !important; }
+            /* Elegant Graph Sizing */
+            .graph-container { margin-bottom: 15px !important; }
+            canvas { max-height: 260px !important; width: 100% !important; }
+
+            /* High-Contrast Roadmap Table */
+            .roadmap-table { width: 100% !important; margin: 0 auto !important; border: 1.5px solid #000 !important; border-collapse: collapse !important; }
+            .roadmap-table th { background: #f1f5f9 !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 4px !important; font-size: 8pt !important; }
             
-            canvas { max-height: 160px !important; width: 100% !important; }
+            /* FIX: Dark font for all table data in PDF */
+            .roadmap-row td { 
+                padding: 4px !important; 
+                border-bottom: 1px solid #cbd5e1 !important; 
+                font-size: 8.5pt !important; 
+                color: #000 !important; /* Ensure black text */
+                font-weight: 600 !important;
+            }
+            .roadmap-row td span { color: #000 !important; } /* Override white/dim spans */
+            .roadmap-row td .text-total-ice { color: #002d72 !important; font-weight: 900 !important; } /* Contrast boost */
 
-            .card-surface { border: 1px solid #e2e8f0 !important; box-shadow: none !important; background: #fff !important; }
-            .brand-gradient { background: #fff !important; border: 2px solid #000 !important; }
+            .card-surface { border: 1px solid #e2e8f0 !important; background: #fff !important; }
+            .brand-gradient { background: #fff !important; border: 1.5px solid #000 !important; }
         }
 
         .print-summary-bar { display: none; }
@@ -242,11 +253,11 @@
         </div>
     </nav>
 
-    <!-- CENTERED PRINT HEADER (RESTORED) -->
+    <!-- CENTERED PRINT HEADER -->
     <div class="print-header">
-        <img src="https://s12.gifyu.com/images/b39dH.png" class="h-14 w-auto mb-3">
+        <img src="https://s12.gifyu.com/images/b39dH.png" class="h-14 w-auto mb-2">
         <h1 class="text-2xl font-black uppercase italic tracking-tighter" style="color:black">PARAMOUNT PARTNER PERFORMANCE FORECAST</h1>
-        <p class="text-[9pt] font-bold text-gray-600 uppercase tracking-[0.3em]">TOTAL WIRELESS EXCLUSIVE RETAIL PROGRAM</p>
+        <p class="text-[8pt] font-bold text-gray-500 uppercase tracking-[0.3em]">TOTAL WIRELESS EXCLUSIVE RETAIL PROGRAM</p>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 py-8">
@@ -353,9 +364,10 @@
                 </div>
 
                 <!-- Money Growth Plan -->
-                <div class="card-surface p-6">
-                    <h3 class="text-sm font-black uppercase tracking-widest text-total-ice mb-4 italic text-center">Projected Revenue Trajectory</h3>
-                    <div class="h-[280px] print:h-[180px]">
+                <div class="card-surface p-6 graph-container">
+                    <h3 class="text-sm font-black uppercase tracking-widest text-total-ice mb-4 italic text-center no-print">Projected Revenue Trajectory</h3>
+                    <h3 class="hidden print:block text-xs font-black uppercase tracking-widest text-gray-800 mb-2 text-center">Projected Revenue Trajectory</h3>
+                    <div class="h-[280px] print:h-[260px]">
                         <canvas id="compChart"></canvas>
                     </div>
                 </div>
@@ -472,7 +484,7 @@
             const churnRate = parseInt(document.getElementById('churn').value) / 100;
             document.getElementById('churnDisplay').innerText = (churnRate * 100).toFixed(0) + '%';
 
-            // PDF/Print Sync
+            // PDF Sync
             document.getElementById('p-psa').innerText = monthlyPSA;
             document.getElementById('p-plan').innerText = '$' + planPrice;
             document.getElementById('p-churn').innerText = (churnRate * 100).toFixed(0) + '%';
