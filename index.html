@@ -102,7 +102,6 @@
             letter-spacing: 0.12em;
         }
 
-        /* Large PSA Input for Web UI */
         input[type="number"] {
             background-color: #0a1118;
             border: 1px solid var(--total-border);
@@ -130,7 +129,7 @@
         .edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
         .edu-indicator.active { background: var(--total-ice); width: 20px; }
 
-        /* --- PDF DESIGNER ENGINE: 1-PAGE PROFESSIONAL LETTERHEAD --- */
+        /* --- PDF DESIGNER ENGINE: OPTIMIZED ONE-PAGE LETTERHEAD --- */
         @media print {
             @page { 
                 size: letter portrait; 
@@ -152,82 +151,93 @@
                 max-width: 100% !important;
                 margin: 0 auto !important;
                 padding: 0 !important; 
-                zoom: 0.75; /* Slightly tighter for 1-page safety */
+                zoom: 0.78; /* Balanced zoom for single page height usage */
             }
 
             .grid { display: block !important; }
             .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto 5px auto !important; }
 
-            /* Professional Letterhead: Logo Left (Moved +50px), Text Right */
+            /* Professional Letterhead: Logo Left (65px gap), Title Right */
             .print-header {
                 display: flex !important;
                 flex-direction: row !important;
                 align-items: center !important;
                 justify-content: space-between !important;
-                padding: 65px 40px 10px 65px !important; /* Fixed: Added 50px more to top and left */
-                margin-bottom: 10px !important;
+                padding: 65px 65px 20px 65px !important; /* Proper safety gap */
+                margin-bottom: 15px !important;
                 border-bottom: none !important; 
             }
-            .print-header img { height: 60px !important; margin: 0 !important; }
+            .print-header img { height: 65px !important; margin: 0 !important; }
             .print-header h1 { 
-                font-size: 20pt !important; 
+                font-size: 22pt !important; 
                 color: #000 !important; 
                 font-weight: 300 !important; 
                 text-align: right !important; 
                 letter-spacing: -0.01em !important;
                 margin: 0 !important; 
                 flex-grow: 1;
-                text-transform: capitalize !important; /* Proper Title Case */
+                text-transform: capitalize !important; 
             }
 
-            /* Restored Summary Box: Larger and Bold */
+            /* Restored Summary Box: Visible & Bold */
             .print-summary-bar {
                 display: flex !important;
                 justify-content: space-around !important;
                 background: #f8fafc !important;
-                border: 2px solid #000 !important; /* Box Restored */
-                padding: 12px !important; 
-                margin: 0 65px 15px 65px !important; /* Aligned with logo safety */
+                border: 2.5px solid #000 !important; 
+                padding: 15px !important; 
+                margin: 0 65px 25px 65px !important; 
                 font-weight: 800 !important;
                 text-transform: uppercase !important;
-                font-size: 13pt !important; /* Larger text */
+                font-size: 14pt !important; 
                 color: #000 !important;
-                border-radius: 4px !important;
+                border-radius: 6px !important;
             }
 
-            /* KPI Row */
+            /* KPI Row - Better Vertical Spacing */
             .kpi-row { 
                 display: grid !important; 
                 grid-template-columns: repeat(3, 1fr) !important; 
-                gap: 15px !important;
-                margin-bottom: 15px !important;
+                gap: 20px !important;
+                margin-bottom: 30px !important;
                 padding: 0 65px !important;
             }
             .kpi-card { 
                 background: #fff !important; 
-                border: 1.5px solid #000 !important; 
-                padding: 14px !important;
-                text-align: left !important;
+                border: 2px solid #000 !important; 
+                padding: 18px !important;
+                text-align: center !important;
             }
-            .kpi-card p.stat-label { color: var(--total-blue) !important; margin-bottom: 2px !important; font-size: 8pt !important; }
-            .stat-value { color: black !important; font-size: 22pt !important; font-weight: 900 !important; }
+            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 4px !important; font-size: 8pt !important; }
+            .stat-value { color: black !important; font-size: 24pt !important; font-weight: 900 !important; }
 
-            /* Graph and Roadmap */
-            .graph-container { margin-bottom: 10px !important; padding: 10px !important; border: 1px solid #eee !important; margin: 0 65px 10px 65px !important;}
-            canvas { max-height: 250px !important; width: 100% !important; }
+            /* Fixed Graph Container - Uses Bottom Space Instead of Stretching */
+            .graph-container { 
+                margin: 0 65px 30px 65px !important;
+                padding: 20px !important; 
+                border: 1.5px solid #eee !important; 
+                height: 420px !important; /* Increased height to use bottom space */
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
+            }
+            canvas { 
+                height: 380px !important; /* Elegant vertical scale */
+                width: 100% !important; 
+            }
 
             /* High-Contrast Roadmap Table */
             .roadmap-container { padding: 0 65px !important; }
-            .roadmap-table { width: 100% !important; margin: 0 auto !important; border: 1.5px solid #000 !important; border-collapse: collapse !important; }
-            .roadmap-table th { background: #f1f5f9 !important; color: #000 !important; border-bottom: 2px solid #000 !important; padding: 5px !important; font-size: 9pt !important; }
+            .roadmap-table { width: 100% !important; margin: 0 auto !important; border: 2px solid #000 !important; border-collapse: collapse !important; }
+            .roadmap-table th { background: #f1f5f9 !important; color: #000 !important; border-bottom: 2px solid #000 !important; padding: 6px !important; font-size: 10pt !important; }
             
-            /* Sharp Black Font for Data cells */
+            /* Pure Black Font for sharp printing */
             .roadmap-row td { 
-                padding: 5px !important; 
-                border-bottom: 1px solid #eee !important; 
-                font-size: 9.5pt !important; 
+                padding: 6px !important; 
+                border-bottom: 1px solid #ddd !important; 
+                font-size: 10pt !important; 
                 color: #000000 !important; 
-                font-weight: 600 !important;
+                font-weight: 700 !important;
             }
             .roadmap-row td span, .roadmap-row td p { color: #000000 !important; opacity: 1 !important; }
             .roadmap-row td .text-total-ice { color: #002d72 !important; font-weight: 900 !important; }
@@ -264,14 +274,14 @@
         </div>
     </nav>
 
-    <!-- DESIGNER PDF HEADER: LOGO LEFT (FIXED GAP), TITLE RIGHT -->
+    <!-- DESIGNER PDF HEADER: LOGO LEFT (SAFETY MARGINS), TITLE RIGHT -->
     <div class="print-header">
         <img src="https://s12.gifyu.com/images/b39dH.png" alt="Paramount Logo">
         <h1>Paramount Partner Performance Forecast</h1>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 py-8">
-        <!-- Centered Summary Bar (PDF Only) -->
+        <!-- Summary Box for PDF Export -->
         <div class="print-summary-bar">
             <div>Target PSA: <span id="p-psa" class="text-total-red">125</span></div>
             <div>Selected Plan: <span id="p-plan" class="text-total-red">$50</span></div>
@@ -377,7 +387,7 @@
                 <div class="card-surface p-6 graph-container">
                     <h3 class="text-sm font-black uppercase tracking-widest text-total-ice mb-4 italic text-center no-print">Projected Revenue Trajectory</h3>
                     <h3 class="hidden print:block text-xs font-black uppercase tracking-widest text-gray-800 mb-2 text-center">Projected Revenue Trajectory</h3>
-                    <div class="h-[280px] print:h-[240px]">
+                    <div class="h-[280px] print:h-[380px]">
                         <canvas id="compChart"></canvas>
                     </div>
                 </div>
@@ -494,7 +504,7 @@
             const churnRate = parseInt(document.getElementById('churn').value) / 100;
             document.getElementById('churnDisplay').innerText = (churnRate * 100).toFixed(0) + '%';
 
-            // PDF Sync
+            // Sync print summary values
             document.getElementById('p-psa').innerText = monthlyPSA;
             document.getElementById('p-plan').innerText = '$' + planPrice;
             document.getElementById('p-churn').innerText = (churnRate * 100).toFixed(0) + '%';
