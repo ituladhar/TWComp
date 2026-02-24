@@ -32,7 +32,7 @@
             background: linear-gradient(135deg, var(--total-blue) 0%, #001a45 100%);
         }
 
-        /* Attention-Grabbing CTA Pulse */
+        /* UI Attention Join Button */
         @keyframes cta-attention {
             0% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
             50% { box-shadow: 0 0 25px 5px rgba(237, 28, 36, 0.4); transform: scale(1.02); }
@@ -50,7 +50,6 @@
         ::-webkit-scrollbar-track { background: var(--total-dark); }
         ::-webkit-scrollbar-thumb { background: var(--total-border); border-radius: 10px; }
 
-        /* Plan Cards */
         .plan-card {
             background-color: var(--total-panel);
             border: 2px solid var(--total-border);
@@ -58,16 +57,14 @@
             padding: 14px;
             cursor: pointer;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
         }
-        .plan-card:hover { border-color: #4b5563; transform: translateY(-2px); }
         .plan-card.active {
             border-color: var(--total-red);
             background-color: rgba(237, 28, 36, 0.08);
             box-shadow: 0 10px 20px -10px rgba(237, 28, 36, 0.2);
         }
 
-        /* Preset Chips */
+        /* Preset Chips Color Correction */
         .preset-chip {
             background: var(--total-border);
             padding: 6px 14px;
@@ -77,17 +74,14 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s;
-            color: #94a3b8;
-            border: 1px solid transparent;
+            color: #94a3b8; /* Slate gray color */
         }
-        .preset-chip:hover { background: #4b5563; color: white; }
         .preset-chip.active { 
             background: var(--total-ice); 
             color: white;
             box-shadow: 0 0 15px rgba(0, 163, 224, 0.3);
         }
 
-        /* Stats Cards */
         .card-surface {
             background-color: var(--total-panel);
             border: 1px solid var(--total-border);
@@ -98,15 +92,6 @@
         .kpi-card:hover {
             transform: translateY(-8px) scale(1.02);
             border-color: rgba(255, 255, 255, 0.2);
-            z-index: 10;
-        }
-        
-        .kpi-card.ice-glow:hover {
-            box-shadow: 0 20px 40px -10px rgba(0, 163, 224, 0.3);
-        }
-        
-        .kpi-card.red-glow:hover {
-            box-shadow: 0 20px 40px -10px rgba(237, 28, 36, 0.3);
         }
 
         .stat-label {
@@ -117,16 +102,8 @@
             letter-spacing: 0.12em;
         }
 
-        .stat-detail {
-            font-size: 0.65rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            color: #64748b;
-            letter-spacing: 0.05em;
-            line-height: 1.5;
-        }
+        .stat-detail { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; color: #64748b; }
 
-        /* Inputs */
         input[type="number"] {
             background-color: #0a1118;
             border: 1px solid var(--total-border);
@@ -137,148 +114,79 @@
             font-size: 0.85rem;
             width: 70px;
             text-align: center;
-            outline: none;
-            transition: border-color 0.2s;
         }
-        input[type="number"]:focus { border-color: var(--total-ice); }
 
-        /* Toggle Switch */
-        .switch { position: relative; display: inline-block; width: 44px; height: 22px; }
-        .switch input { opacity: 0; width: 0; height: 0; }
-        .slider {
-            position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0;
-            background-color: #2d3d4d; transition: .4s; border-radius: 34px;
-        }
-        .slider:before {
-            position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px;
-            background-color: white; transition: .4s; border-radius: 50%;
-        }
-        input:checked + .slider { background-color: var(--total-red); }
-        input:checked + .slider:before { transform: translateX(22px); }
-
-        /* Roadmap Table */
-        .roadmap-table { width: 100%; border-collapse: collapse; table-layout: auto; }
-        .roadmap-table th {
-            background: rgba(0,0,0,0.3);
-            padding: 1rem 0.75rem;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: #64748b;
-            border-bottom: 2px solid var(--total-border);
-        }
+        .roadmap-table th { background: rgba(0,0,0,0.3); padding: 1rem 0.75rem; font-size: 0.65rem; text-transform: uppercase; color: #64748b; border-bottom: 2px solid var(--total-border); }
         .roadmap-row { transition: all 0.2s ease; border-bottom: 1px solid rgba(255,255,255,0.03); }
-        .roadmap-row:hover { background: rgba(255,255,255,0.02); }
-
-        .growth-badge {
-            font-size: 0.6rem; padding: 2px 5px; border-radius: 3px; font-weight: 800;
-            background: rgba(0, 163, 224, 0.15); color: var(--total-ice); display: inline-block;
-        }
-
-        .milestone-tag {
-            font-size: 0.55rem; padding: 1px 4px; border-radius: 3px; font-weight: 800;
-            background: var(--total-red); color: white; text-transform: uppercase;
-            display: inline-block; margin-top: 2px;
-        }
 
         /* Intelligence Deck Styling */
         #eduContent { transition: opacity 0.4s ease-in-out; }
         .edu-fade { opacity: 0; }
-        .edu-indicator {
-            height: 3px; width: 8px; background: rgba(255,255,255,0.1);
-            border-radius: 2px; transition: all 0.3s;
-        }
+        .edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
         .edu-indicator.active { background: var(--total-ice); width: 20px; }
-        .stack-bar { height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; display: flex; }
-        .stack-segment { height: 100%; transition: width 0.5s ease; }
 
-        /* ADVANCED SINGLE-PAGE PRINT OPTIMIZATION */
+        /* PRINT MODE OVERHAUL - SINGLE PAGE */
         @media print {
-            @page {
-                size: letter portrait;
-                margin: 0.2in;
-            }
-            
+            @page { size: letter portrait; margin: 0.3in; }
             .no-print { display: none !important; }
             
             body { 
                 background: white !important; 
-                color: #000 !important; 
-                background-image: none !important;
-                font-size: 9pt !important;
-                -webkit-print-color-adjust: exact;
-                print-color-adjust: exact;
+                color: black !important; 
+                background-image: none !important; 
+                zoom: 0.85;
             }
 
-            /* Main Layout Fix */
-            .max-w-7xl {
-                max-width: 100% !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                zoom: 0.88;
+            /* Stack layout for print */
+            .grid { display: block !important; }
+            .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin-bottom: 1rem !important; }
+
+            /* New Summary Bar for Print */
+            .print-summary-bar {
+                display: flex !important;
+                justify-content: space-between;
+                background: #f8f9fa !important;
+                border: 1.5px solid #000 !important;
+                padding: 10px 20px !important;
+                border-radius: 8px !important;
+                margin-bottom: 15px !important;
+                font-weight: 900 !important;
+                text-transform: uppercase !important;
+                font-size: 10pt !important;
             }
 
-            .grid { 
+            /* Fix KPI Cards in Print */
+            .kpi-row { 
                 display: grid !important; 
-                grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
-                gap: 10px !important;
+                grid-template-columns: repeat(3, 1fr) !important; 
+                gap: 15px !important;
             }
-
-            .lg\:col-span-4 { grid-column: span 4 / span 4 !important; }
-            .lg\:col-span-8 { grid-column: span 8 / span 8 !important; }
-
-            /* Minimize KPI Cards */
             .kpi-card { 
-                background: #f8f9fa !important; 
-                border: 1.5px solid #000 !important; 
-                padding: 12px !important;
-                margin-bottom: 5px !important;
-                break-inside: avoid;
-                transform: none !important;
-                box-shadow: none !important;
-            }
-            
-            /* Remove KPI Details */
-            .kpi-card .mt-4.pt-3 { display: none !important; }
-
-            /* Simplify Sidebar Controls */
-            .card-surface { 
                 background: #fff !important; 
-                border: 1px solid #ddd !important;
-                box-shadow: none !important;
-                margin-bottom: 8px !important;
+                border: 2px solid #000 !important; 
+                padding: 15px !important;
+                margin: 0 !important;
+                height: auto !important;
+                break-inside: avoid;
             }
+            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 5px !important; }
+            .kpi-card .stat-detail, .kpi-card .mt-4 { display: none !important; } /* Hide details in print */
+            .stat-value { color: black !important; font-size: 22pt !important; }
 
-            /* Hide Complex Input UI */
-            .preset-chip, input[type="range"], .switch, .grid-cols-3, #eduContent, #eduIndicators { 
-                display: none !important; 
-            }
-
-            /* Show simple numeric values in print instead of interactive cards */
-            .print-only-summary { 
-                display: block !important; 
-                color: #000 !important;
-                font-weight: 800;
-                text-transform: uppercase;
-                font-size: 10pt;
-                line-height: 1.8;
-            }
-
-            /* Tighter Roadmap */
-            .roadmap-table th { background: #eee !important; color: #000 !important; border-bottom: 1px solid #000 !important; padding: 6px !important; }
-            .roadmap-row td { border-bottom: 1px solid #eee !important; padding: 6px !important; font-size: 8pt !important; }
+            /* Tight Roadmap */
+            .roadmap-table { margin-top: 10px !important; }
+            .roadmap-table th { background: #eee !important; color: black !important; border-bottom: 2px solid black !important; padding: 4px !important; }
+            .roadmap-row td { padding: 4px !important; border-bottom: 1px solid #ddd !important; font-size: 8.5pt !important; }
             
-            /* Chart Scaled Down */
-            canvas { max-height: 200px !important; width: 100% !important; }
+            /* Chart Restriction */
+            canvas { max-height: 180px !important; }
 
-            /* Final Page Constraints */
-            html, body {
-                height: 100%;
-                overflow: hidden !important;
-            }
+            .brand-gradient { background: #eee !important; border: 1px solid #000 !important; }
+            .text-white { color: black !important; }
+            .card-surface { border: 1px solid #ccc !important; box-shadow: none !important; }
         }
 
-        .print-only-summary { display: none; }
+        .print-summary-bar { display: none; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -287,7 +195,6 @@
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-4">
                 <img src="https://s12.gifyu.com/images/b39dH.png" alt="Paramount Wireless" class="h-10 w-auto object-contain">
-                
                 <div class="flex flex-col border-l border-gray-700 pl-4">
                     <span class="text-xl font-black italic tracking-tighter uppercase leading-none">
                         Paramount <span class="text-total-red">Partner Growth Model</span>
@@ -306,25 +213,32 @@
         </div>
     </nav>
 
-    <!-- Print Only Header -->
+    <!-- PRINT HEADER -->
     <div class="hidden print:block mb-4">
         <div class="flex justify-between items-center border-b-2 border-black pb-2">
             <div class="flex items-center gap-2">
                 <img src="https://s12.gifyu.com/images/b39dH.png" class="h-8 w-auto">
-                <h1 class="text-xl font-black uppercase italic tracking-tighter">Partner Performance Forecast</h1>
+                <h1 class="text-xl font-black uppercase italic tracking-tighter">Growth Forecast Report</h1>
             </div>
-            <p class="text-[8pt] font-bold text-gray-500 uppercase">Generated Mar 2025</p>
+            <p class="text-[8pt] font-bold text-gray-500 uppercase">Total Wireless Exclusive Program</p>
         </div>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 py-8">
+        <!-- PRINT SUMMARY BAR (Shows up only in PDF) -->
+        <div class="print-summary-bar">
+            <div>Target PSA: <span id="p-psa">125</span></div>
+            <div>Selected Plan: <span id="p-plan">$50</span></div>
+            <div>Churn Rate: <span id="p-churn">15%</span></div>
+        </div>
+
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <!-- Sidebar -->
-            <div class="lg:col-span-4 space-y-4">
-                <div class="card-surface p-6">
+            <!-- Sidebar (Interactive UI) -->
+            <div class="lg:col-span-4 space-y-6 no-print">
+                <div class="card-surface p-6 space-y-8">
                     <section>
-                        <div class="flex justify-between items-center mb-6 no-print">
+                        <div class="flex justify-between items-center mb-6">
                             <h3 class="text-xs font-black uppercase tracking-widest text-gray-400">Your Store</h3>
                             <div class="flex gap-2">
                                 <span class="preset-chip" onclick="applyPreset(this, 50, 10)">Startup</span>
@@ -332,15 +246,8 @@
                                 <span class="preset-chip" onclick="applyPreset(this, 300, 12)">Elite</span>
                             </div>
                         </div>
-
-                        <!-- SIMPLE SUMMARY FOR PRINT -->
-                        <div class="print-only-summary space-y-2">
-                            <div class="flex justify-between border-b pb-1"><span>Target PSA:</span> <span id="printPSA">125</span></div>
-                            <div class="flex justify-between border-b pb-1"><span>Selected Plan:</span> <span id="printPlan">$50</span></div>
-                            <div class="flex justify-between border-b pb-1"><span>Churn Rate:</span> <span id="printChurn">15%</span></div>
-                        </div>
                         
-                        <div class="space-y-6 no-print">
+                        <div class="space-y-6">
                             <div>
                                 <label class="stat-label mb-3 block">Choose Plan</label>
                                 <div class="grid grid-cols-3 gap-2">
@@ -364,21 +271,21 @@
                                     Monthly Sales (PSA)
                                     <input type="number" id="psaInput" value="125" min="1" max="1000" oninput="syncPSA(this.value, 'slider')">
                                 </label>
-                                <input type="range" id="psaSlider" min="10" max="500" value="125" step="5" oninput="syncPSA(this.value, 'input')" class="w-full opacity-80 accent-total-red">
+                                <input type="range" id="psaSlider" min="10" max="500" value="125" step="5" oninput="syncPSA(this.value, 'input')" class="w-full accent-total-red opacity-80">
                             </div>
 
                             <div class="pt-4 border-t border-gray-800">
-                                <div class="flex justify-between items-end mb-2 relative group">
-                                    <label class="stat-label text-gray-500 cursor-help border-b border-dotted border-gray-600 uppercase">Projected Churn Rate</label>
-                                    <span class="text-xs font-bold text-gray-500" id="churnDisplay">15%</span>
+                                <label class="stat-label text-gray-500 block uppercase mb-2">Projected Churn Rate</label>
+                                <div class="flex items-center gap-4">
+                                    <input type="range" id="churn" min="0" max="40" value="15" oninput="runCalculation()" class="flex-1 opacity-40">
+                                    <span class="text-sm font-black text-total-ice w-10" id="churnDisplay">15%</span>
                                 </div>
-                                <input type="range" id="churn" min="0" max="40" value="15" oninput="runCalculation()" class="w-full opacity-30">
                             </div>
                         </div>
                     </section>
                 </div>
 
-                <!-- Strategic Intelligence Deck (HIDDEN IN PRINT) -->
+                <!-- Growth Intel Deck (Hidden in Print) -->
                 <div class="card-surface p-6 brand-gradient border-none relative overflow-hidden min-h-[280px] flex flex-col justify-between shadow-2xl no-print">
                     <div id="eduContent"></div>
                     <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/10">
@@ -391,58 +298,47 @@
             </div>
 
             <!-- Main Panel -->
-            <div class="lg:col-span-8 space-y-4">
+            <div class="lg:col-span-8 space-y-8">
                 
-                <!-- Primary KPIs -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="card-surface kpi-card ice-glow p-6 border-b-4 border-total-ice cursor-default">
-                        <p class="stat-label mb-1">Total Value / Act</p>
+                <!-- KPI Row -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 kpi-row">
+                    <div class="card-surface kpi-card ice-glow p-6 border-b-4 border-total-ice">
+                        <p class="stat-label mb-2">Total Value / Act</p>
                         <div class="flex items-baseline gap-1">
                             <span class="text-xl font-bold text-total-ice">$</span>
                             <p class="stat-value text-3xl font-black tracking-tighter" id="statPerAct">0</p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-gray-800 no-print">
                             <p class="stat-detail">Calculation Basis:</p>
-                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed">
-                                Upfront Spiff • Stacked Retention • Airtime Rev-Share • Margin
-                            </p>
+                            <p class="text-[9px] text-gray-500 mt-1 uppercase">Spiff • Retention • Residuals • Margin</p>
                         </div>
                     </div>
 
-                    <div class="card-surface kpi-card red-glow p-6 border-b-4 border-total-red cursor-default">
-                        <p class="stat-label mb-1">Month 6 Payout</p>
+                    <div class="card-surface kpi-card red-glow p-6 border-b-4 border-total-red">
+                        <p class="stat-label mb-2">Month 6 Payout</p>
                         <div class="flex items-baseline gap-1">
                             <span class="text-xl font-bold text-total-red">$</span>
                             <p class="stat-value text-3xl font-black tracking-tighter" id="statM6">0</p>
                         </div>
                         <div class="mt-4 pt-3 border-t border-gray-800 no-print">
                             <p class="stat-detail">Calculation Basis:</p>
-                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed">
-                                Instant Cash • Stacked Bonuses • Base Residuals • PSA Achievement
-                            </p>
+                            <p class="text-[9px] text-gray-500 mt-1 uppercase">Instant Cash • Stacked Bonus • Airtime</p>
                         </div>
                     </div>
 
-                    <div class="card-surface kpi-card ice-glow brand-gradient p-6 border-b-4 border-total-ice shadow-2xl relative overflow-hidden group cursor-default">
-                        <div class="relative z-10">
-                            <p class="stat-label mb-1 text-total-ice/80">1-Year Total Profit</p>
-                            <div class="flex items-baseline gap-1">
-                                <span class="text-xl font-bold text-total-ice">$</span>
-                                <p class="stat-value text-3xl font-black tracking-tighter text-white" id="statYear">0</p>
-                            </div>
+                    <div class="card-surface kpi-card ice-glow brand-gradient p-6 border-b-4 border-total-ice shadow-2xl overflow-hidden">
+                        <p class="stat-label mb-2 text-total-ice/80">1-Year Total Profit</p>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-xl font-bold text-total-ice">$</span>
+                            <p class="stat-value text-3xl font-black tracking-tighter text-white" id="statYear">0</p>
                         </div>
-                        <div class="absolute -right-4 -bottom-4 text-white opacity-5 text-4xl font-black uppercase tracking-tighter no-print">PARAMOUNT</div>
                     </div>
                 </div>
 
-                <!-- Projection Chart -->
+                <!-- Money Growth Plan -->
                 <div class="card-surface p-6">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-4 gap-4">
-                        <div>
-                            <h3 class="text-sm font-black uppercase tracking-widest text-total-ice italic">Money Growth Plan</h3>
-                        </div>
-                    </div>
-                    <div class="h-[300px] print:h-[200px]">
+                    <h3 class="text-sm font-black uppercase tracking-widest text-total-ice mb-4 italic">Money Growth Plan</h3>
+                    <div class="h-[300px] print:h-[180px]">
                         <canvas id="compChart"></canvas>
                     </div>
                 </div>
@@ -452,12 +348,12 @@
                     <div class="p-3 border-b border-gray-800 bg-gray-900/30">
                         <h3 class="text-xs font-black uppercase tracking-[0.1em] text-total-ice italic">12-Month Performance Roadmap</h3>
                     </div>
-                    <div class="w-full">
-                        <table class="roadmap-table">
+                    <div class="w-full overflow-x-auto">
+                        <table class="roadmap-table w-full">
                             <thead>
                                 <tr>
-                                    <th class="text-left px-4 w-28 italic">Period</th>
-                                    <th class="text-right px-2 w-16">Lines</th>
+                                    <th class="text-left px-4 w-28 italic">Month</th>
+                                    <th class="text-right px-2">Lines</th>
                                     <th class="text-right px-2">Cash</th>
                                     <th class="text-right px-2">Bonus</th>
                                     <th class="text-right px-2">Residual</th>
@@ -481,17 +377,17 @@
             {
                 title: "Fighter Brand Strategy",
                 subtitle: "Winning the Metro and Cricket Market",
-                content: `<div class="space-y-4"><div class="bg-black/20 p-3 rounded border border-white/5"><p class="text-[9px] font-bold text-white/60 uppercase">Eliminate customer pain points: <span class="text-total-ice">No Activation Fees</span>, <span class="text-total-ice">No Hidden Taxes</span>.</p></div></div>`
+                content: `<div class="space-y-4"><div class="bg-black/20 p-3 rounded border border-white/5"><p class="text-[9px] font-bold text-white/60 uppercase italic leading-relaxed">Eliminate customer pain points: <span class="text-total-ice">No Activation Fees</span>, <span class="text-total-ice">No Hidden Taxes</span>, and America's fastest 5G network power.</p></div></div>`
             },
             {
                 title: "12X Faster Network",
                 subtitle: "Verizon 5G Power",
-                content: `<div class="space-y-3"><div class="bg-white/5 p-3 rounded-lg border border-white/5 flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-total-red"></div><p class="text-[10px] font-bold text-white uppercase italic">12X Faster Unlimited Data</p></div></div>`
+                content: `<div class="space-y-3"><div class="bg-white/5 p-3 rounded-lg border border-white/5 flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-total-red"></div><p class="text-[10px] font-bold text-white uppercase italic leading-none">12X Faster Unlimited Data</p></div><p class="text-[9px] font-bold text-white/40 uppercase italic">Better network attribution drives word-of-mouth growth.</p></div>`
             },
             {
                 title: "Forever Money (17%)",
-                subtitle: "Paramount Residual Moat",
-                content: `<div class="space-y-4"><div class="grid grid-cols-2 gap-4"><div class="bg-black/20 p-3 rounded border border-white/5 text-center"><p class="text-xl font-black italic text-total-ice">8.5%</p><p class="text-[8px] uppercase mt-1 leading-none">Airtime</p></div><div class="bg-black/20 p-3 rounded border border-white/5 text-center"><p class="text-xl font-black italic text-total-ice">8.5%</p><p class="text-[8px] uppercase mt-1 leading-none">Autopay</p></div></div></div>`
+                subtitle: "Residual Wealth Moat",
+                content: `<div class="space-y-4"><div class="grid grid-cols-2 gap-4"><div class="bg-black/20 p-3 rounded border border-white/5 text-center"><p class="text-xl font-black italic text-total-ice">8.5%</p><p class="text-[8px] uppercase mt-1 leading-none font-black text-white/50">Airtime</p></div><div class="bg-black/20 p-3 rounded border border-white/5 text-center"><p class="text-xl font-black italic text-total-ice">8.5%</p><p class="text-[8px] uppercase mt-1 leading-none font-black text-white/50">Autopay</p></div></div><p class="text-[9px] font-bold text-white/60 text-center uppercase italic">Yield on every active line, every month.</p></div>`
             }
         ];
 
@@ -544,10 +440,10 @@
             const churnRate = parseInt(document.getElementById('churn').value) / 100;
             document.getElementById('churnDisplay').innerText = (churnRate * 100).toFixed(0) + '%';
 
-            // Sync print summary values
-            document.getElementById('printPSA').innerText = monthlyPSA;
-            document.getElementById('printPlan').innerText = '$' + planPrice;
-            document.getElementById('printChurn').innerText = (churnRate * 100).toFixed(0) + '%';
+            // Print summary update
+            document.getElementById('p-psa').innerText = monthlyPSA;
+            document.getElementById('p-plan').innerText = '$' + planPrice;
+            document.getElementById('p-churn').innerText = (churnRate * 100).toFixed(0) + '%';
 
             const SPIFF_M1 = 0.50, SPIFF_RET = 0.75, AIRTIME_TOTAL = 0.17, RESIDUAL = 0.03, DEVICE_MARGIN = 10.00;
 
@@ -571,25 +467,25 @@
         }
 
         function updateUI(data, cumulativeComp) {
-            const m6 = data[5], m1_total = data[0].total, plan = selectedPlanValue;
+            const m6 = data[5], plan = selectedPlanValue;
             const valPerAct = (plan * 0.5) + (plan * 0.75 * 5) + 10 + (plan * 0.17 * 6);
             document.getElementById('statPerAct').innerText = Math.round(valPerAct).toLocaleString();
             document.getElementById('statM6').innerText = Math.round(m6.total).toLocaleString();
             document.getElementById('statYear').innerText = Math.round(cumulativeComp).toLocaleString();
+            
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
             data.forEach(row => {
                 const tr = document.createElement('tr');
                 tr.className = "roadmap-row";
                 let tag = row.month === 1 ? `<br><span class="milestone-tag">Launch</span>` : (row.month === 6 ? `<br><span class="milestone-tag" style="background:var(--total-ice)">Peak</span>` : "");
-                let growth = row.month > 1 ? `<br><span class="growth-badge">+${((row.total - m1_total) / m1_total * 100).toFixed(0)}%</span>` : "";
                 tr.innerHTML = `
                     <td class="px-4 py-4"><span class="font-black text-gray-500 italic text-sm uppercase">M${row.month < 10 ? '0'+row.month : row.month}</span>${tag}</td>
                     <td class="px-2 py-4 text-right"><span class="font-bold text-white text-[0.9rem]">${row.activeBase.toLocaleString()}</span></td>
-                    <td class="px-2 py-4 text-right text-gray-300 font-bold text-[0.85rem]">$${Math.round(row.instant).toLocaleString()}</td>
-                    <td class="px-2 py-4 text-right text-gray-300 font-bold text-[0.85rem]">$${Math.round(row.retention).toLocaleString()}</td>
-                    <td class="px-2 py-4 text-right text-gray-300 font-bold text-[0.85rem]">$${Math.round(row.resid).toLocaleString()}</td>
-                    <td class="px-4 py-4 text-right"><span class="font-black text-total-ice text-base">$${Math.round(row.total).toLocaleString()}</span>${growth}</td>
+                    <td class="px-2 py-4 text-right text-gray-300 font-bold">$${Math.round(row.instant).toLocaleString()}</td>
+                    <td class="px-2 py-4 text-right text-gray-300 font-bold">$${Math.round(row.retention).toLocaleString()}</td>
+                    <td class="px-2 py-4 text-right text-gray-300 font-bold">$${Math.round(row.resid).toLocaleString()}</td>
+                    <td class="px-4 py-4 text-right font-black text-total-ice text-base">$${Math.round(row.total).toLocaleString()}</td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -605,7 +501,7 @@
                 type: 'line',
                 data: {
                     labels: data.map(d => 'Mo ' + d.month),
-                    datasets: [{ label: 'Pay Total', data: data.map(d => d.total), borderColor: '#ed1c24', borderWidth: 4, fill: true, backgroundColor: gradient, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#ed1c24', yAxisID: 'y' },
+                    datasets: [{ label: 'Check Total', data: data.map(d => d.total), borderColor: '#ed1c24', borderWidth: 4, fill: true, backgroundColor: gradient, tension: 0.4, pointRadius: 3, pointBackgroundColor: '#ed1c24', yAxisID: 'y' },
                                { label: 'Lines', data: data.map(d => d.activeBase), borderColor: '#00a3e0', borderWidth: 2, borderDash: [4, 4], fill: false, yAxisID: 'y1', pointRadius: 3, pointBackgroundColor: '#00a3e0' }]
                 },
                 options: {
