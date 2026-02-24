@@ -149,13 +149,13 @@
                 max-width: 100% !important;
                 margin: 0 auto !important;
                 padding: 0 !important; 
-                zoom: 0.8; /* Adjusted for better spacing and 1-page fit */
+                zoom: 0.78; /* Balanced zoom for single page fit */
             }
 
             .grid { display: block !important; }
             .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto !important; }
 
-            /* Professional Summary Box - Ink Efficient */
+            /* Professional Summary Box - Top Element with Breathing Room */
             .print-summary-bar {
                 display: flex !important;
                 justify-content: space-around !important;
@@ -175,42 +175,41 @@
                 display: grid !important; 
                 grid-template-columns: repeat(3, 1fr) !important; 
                 gap: 15px !important;
-                margin-bottom: 25px !important;
+                margin-bottom: 20px !important;
                 padding: 0 0.85in !important;
             }
             .kpi-card { 
                 background: #fff !important; 
-                border: 1.5px solid #000 !important; 
+                border: 1px solid #000 !important; 
                 padding: 14px !important;
                 text-align: center !important;
             }
             .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 4px !important; font-size: 8pt !important; font-weight: 700 !important; }
             .stat-value { color: #000 !important; font-size: 22pt !important; font-weight: 900 !important; line-height: 1 !important; }
 
-            /* Enhanced Graph Proportion - Now with more space */
+            /* FIXED GRAPH PROPORTION - Prevents vertical stretching */
             .graph-container { 
-                margin: 0 0.85in 30px 0.85in !important; 
+                margin: 0 0.85in 25px 0.85in !important; 
                 padding: 15px !important; 
                 border: 1px solid #ddd !important;
-                height: 420px !important; /* Increased height to use bottom space and prevent stretching */
+                height: 300px !important; /* Adjusted height for elegant aspect ratio */
                 display: flex !important;
                 flex-direction: column !important;
                 justify-content: center !important;
             }
             canvas { 
-                height: 380px !important; 
+                height: 270px !important; /* Forces Chart.js to scale correctly */
                 width: 100% !important; 
             }
 
-            /* High-Contrast Professional Roadmap - Lowered */
+            /* High-Contrast Professional Roadmap - Lowered for space */
             .roadmap-container { 
                 padding: 0 0.85in !important; 
-                margin-top: 20px !important; /* Forces the table lower */
             }
             .roadmap-table { width: 100% !important; border: 1.5px solid #000 !important; border-collapse: collapse !important; }
             .roadmap-table th { background: #f8fafc !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 6px !important; font-size: 9pt !important; }
             
-            /* Sharp Black Text Fix */
+            /* Sharp Black Text Fix for contrast */
             .roadmap-row td { 
                 padding: 4px !important; 
                 border-bottom: 1px solid #eee !important; 
