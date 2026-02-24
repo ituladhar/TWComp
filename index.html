@@ -151,8 +151,8 @@
             .max-w-7xl {
                 max-width: 100% !important;
                 margin: 0 auto !important;
-                padding: 0 !important; /* Margins handled by specific elements for logo safety */
-                zoom: 0.76; /* Adjusted zoom to strictly fit one page */
+                padding: 0 !important; 
+                zoom: 0.76; 
             }
 
             .grid { display: block !important; }
@@ -165,15 +165,15 @@
                 align-items: center !important;
                 justify-content: space-between !important;
                 padding: 15px 40px 10px 15px !important; /* Top 15px, Left 15px safety gap */
-                margin-bottom: 8px !important;
-                border-bottom: 2px solid black !important;
+                margin-bottom: 20px !important;
+                border-bottom: none !important; /* Removed separator to save ink */
             }
             .print-header img { height: 50px !important; margin: 0 !important; }
             .print-header h1 { 
                 font-size: 18pt !important; 
                 color: #000 !important; 
-                font-weight: 300 !important; /* Lighter weight for designer look */
-                text-align: right !important; /* Right-aligned text */
+                font-weight: 600 !important; /* Changed to semi-bold as requested */
+                text-align: right !important; 
                 letter-spacing: -0.01em !important;
                 margin: 0 !important; 
                 flex-grow: 1;
@@ -186,7 +186,7 @@
                 gap: 50px;
                 background: transparent !important;
                 border-bottom: 1px solid #ddd !important;
-                padding: 5px 0 5px 15px !important; /* Match logo left gap */
+                padding: 5px 0 5px 15px !important; 
                 margin-bottom: 12px !important;
                 font-weight: 700 !important;
                 text-transform: uppercase !important;
@@ -220,7 +220,7 @@
             .roadmap-table { width: 100% !important; margin: 0 auto !important; border: 1px solid #000 !important; border-collapse: collapse !important; }
             .roadmap-table th { background: #f8fafc !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 4px !important; font-size: 8pt !important; }
             
-            /* FORCED BLACK TEXT - SOLVES WHITEWASH ISSUE */
+            /* Sharp Black Font for Data cells */
             .roadmap-row td { 
                 padding: 4px !important; 
                 border-bottom: 1px solid #eee !important; 
@@ -263,7 +263,7 @@
         </div>
     </nav>
 
-    <!-- DESIGNER PDF HEADER: LOGO LEFT, TITLE RIGHT -->
+    <!-- DESIGNER PDF HEADER -->
     <div class="print-header">
         <img src="https://s12.gifyu.com/images/b39dH.png" alt="Paramount Logo">
         <h1>Paramount Partner Performance Forecast</h1>
