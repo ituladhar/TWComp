@@ -127,7 +127,7 @@
         .edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
         .edu-indicator.active { background: var(--total-ice); width: 20px; }
 
-        /* --- SENIOR DESIGNER PRINT ENGINE: 1-PAGE INK-EFFICIENT --- */
+        /* --- SENIOR DESIGNER PRINT ENGINE: 1-PAGE OPTIMIZED --- */
         @media print {
             @page { 
                 size: letter portrait; 
@@ -148,21 +148,21 @@
             .max-w-7xl {
                 max-width: 100% !important;
                 margin: 0 auto !important;
-                padding: 0.5in 0.85in !important; /* Balanced side margins */
-                zoom: 0.85; /* Ensures single page fit */
+                padding: 0 !important; 
+                zoom: 0.8; /* Adjusted for better spacing and 1-page fit */
             }
 
             .grid { display: block !important; }
-            .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto 5px auto !important; }
+            .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto !important; }
 
             /* Professional Summary Box - Ink Efficient */
             .print-summary-bar {
                 display: flex !important;
                 justify-content: space-around !important;
                 background: #fff !important;
-                border: 1.5px solid #000 !important;
-                padding: 8px !important; 
-                margin-bottom: 15px !important;
+                border: 2px solid #000 !important;
+                padding: 12px !important; 
+                margin: 40px 0.85in 20px 0.85in !important;
                 font-weight: 800 !important;
                 text-transform: uppercase !important;
                 font-size: 11pt !important;
@@ -174,43 +174,49 @@
             .kpi-row { 
                 display: grid !important; 
                 grid-template-columns: repeat(3, 1fr) !important; 
-                gap: 12px !important;
-                margin-bottom: 15px !important;
+                gap: 15px !important;
+                margin-bottom: 25px !important;
+                padding: 0 0.85in !important;
             }
             .kpi-card { 
                 background: #fff !important; 
-                border: 1px solid #000 !important; 
-                padding: 12px !important;
+                border: 1.5px solid #000 !important; 
+                padding: 14px !important;
                 text-align: center !important;
-                box-shadow: none !important;
-                transform: none !important;
             }
-            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 2px !important; font-size: 8pt !important; font-weight: 700 !important; }
-            .stat-value { color: #000 !important; font-size: 20pt !important; font-weight: 900 !important; line-height: 1 !important; }
+            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 4px !important; font-size: 8pt !important; font-weight: 700 !important; }
+            .stat-value { color: #000 !important; font-size: 22pt !important; font-weight: 900 !important; line-height: 1 !important; }
 
-            /* Fixed Graph Proportion - No Stretching */
+            /* Enhanced Graph Proportion - Now with more space */
             .graph-container { 
-                margin-bottom: 15px !important; 
-                padding: 10px !important; 
+                margin: 0 0.85in 30px 0.85in !important; 
+                padding: 15px !important; 
                 border: 1px solid #ddd !important;
-                height: 300px !important; /* Fixed height for elegance */
+                height: 420px !important; /* Increased height to use bottom space and prevent stretching */
+                display: flex !important;
+                flex-direction: column !important;
+                justify-content: center !important;
             }
             canvas { 
-                max-height: 280px !important; 
+                height: 380px !important; 
                 width: 100% !important; 
             }
 
-            /* High-Contrast Professional Roadmap */
+            /* High-Contrast Professional Roadmap - Lowered */
+            .roadmap-container { 
+                padding: 0 0.85in !important; 
+                margin-top: 20px !important; /* Forces the table lower */
+            }
             .roadmap-table { width: 100% !important; border: 1.5px solid #000 !important; border-collapse: collapse !important; }
-            .roadmap-table th { background: #f8fafc !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 4px !important; font-size: 9pt !important; }
+            .roadmap-table th { background: #f8fafc !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 6px !important; font-size: 9pt !important; }
             
             /* Sharp Black Text Fix */
             .roadmap-row td { 
-                padding: 3px !important; 
+                padding: 4px !important; 
                 border-bottom: 1px solid #eee !important; 
                 font-size: 9pt !important; 
-                color: #000000 !important; /* Forces pure black contrast */
-                font-weight: 600 !important;
+                color: #000000 !important; 
+                font-weight: 700 !important;
                 text-align: center !important;
             }
             .roadmap-row td span { color: #000000 !important; opacity: 1 !important; }
@@ -218,6 +224,7 @@
 
             .card-surface { border: 1px solid #eee !important; background: #fff !important; box-shadow: none !important; }
             .min-h-\[280px\] { display: none !important; }
+            .print-header { display: none !important; }
         }
 
         .print-summary-bar { display: none; }
@@ -353,7 +360,7 @@
                 <!-- Money Growth Plan -->
                 <div class="card-surface p-6 graph-container">
                     <h3 class="text-sm font-black uppercase tracking-widest text-total-ice mb-4 italic text-center no-print">Projected Revenue Trajectory</h3>
-                    <h3 class="hidden print:block text-xs font-black uppercase tracking-widest text-gray-800 mb-2 text-center">Projected Revenue Trajectory</h3>
+                    <h3 class="hidden print:block text-xs font-black uppercase tracking-widest text-gray-800 mb-4 text-center">Projected Revenue Trajectory</h3>
                     <div class="flex-grow">
                         <canvas id="compChart"></canvas>
                     </div>
@@ -393,7 +400,7 @@
             {
                 title: "How You Get Paid",
                 subtitle: "Quick Cash + Stay Bonuses",
-                content: `<div class="space-y-4"><div class="stack-bar"><div class="stack-segment bg-total-red" style="width: 12%"></div><div class="stack-segment bg-total-ice" style="width: 88%"></div></div><div class="grid grid-cols-2 gap-4"><div><p class="text-[11px] font-black text-white italic uppercase">50% Quick Cash</p><p class="text-[8px] text-white/40 uppercase mt-1 leading-none">Month 1</p></div><div><p class="text-[11px] font-black text-total-ice italic uppercase">375% Stay Bonus</p><p class="text-[8px] text-white/40 uppercase mt-1">Months 2-6</p></div></div><p class="text-[9px] font-bold text-white/50 leading-relaxed uppercase mt-3 italic">Month 1 covers costs. Mo 2 to 6 is pure profit.</p></div>`
+                content: `<div class="space-y-4"><div class="stack-bar"><div class="stack-segment bg-total-red" style="width: 12%"></div><div class="stack-segment bg-total-ice" style="width: 88%"></div></div><div class="grid grid-cols-2 gap-4"><div><p class="text-[11px] font-black text-white italic uppercase">50% Quick Cash</p><p class="text-[8px] text-white/40 uppercase leading-none mt-1">Month 1</p></div><div><p class="text-[11px] font-black text-total-ice italic uppercase">375% Stay Bonus</p><p class="text-[8px] text-white/40 uppercase mt-1">Months 2-6</p></div></div><p class="text-[9px] font-bold text-white/50 leading-relaxed uppercase mt-3 italic">Month 1 covers costs. Mo 2 to 6 is pure profit.</p></div>`
             },
             {
                 title: "Forever Money (17%)",
