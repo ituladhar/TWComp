@@ -171,7 +171,7 @@
 
                 <!-- Performance Table -->
                 <div class="card-surface overflow-hidden">
-                    <div class="p-8 pb-4 border-b border-gray-800 bg-gray-900/40">
+                    <div class="p-8 pb-4 border-b border-gray-900/40">
                         <h3 class="text-sm font-black uppercase tracking-widest text-total-ice italic">Performance Roadmap</h3>
                         <p class="text-[10px] text-gray-500 font-bold uppercase tracking-tight">12-Month Money Projection</p>
                     </div>
@@ -179,12 +179,15 @@
                         <table class="roadmap-table">
                             <thead>
                                 <tr>
+                                    <!-- Table Header with fixed column alignment and bleeding issues -->
                                     <th class="text-left px-8 w-[18%]"></th>
                                     <th class="text-right px-4 w-[12%]">Lines</th>
                                     <th class="text-right px-4 w-[16%]">Quick Cash</th>
                                     <th class="text-right px-4 w-[16%]">Stay Bonus</th>
-                                    <th class="text-right px-4 w-[18%]">Monthly $</th>
-                                    <th class="text-right pr-10 w-[20%]">Total Check</th>
+                                    <!-- pr-12 creates the gutter between Col 5 and Col 6 -->
+                                    <th class="text-right pr-12 w-[16%]">Monthly $</th>
+                                    <!-- text-left pl-10 keeps title away from right edge while maintaining separation from previous col -->
+                                    <th class="text-left pl-10 w-[22%]">Total Check</th>
                                 </tr>
                             </thead>
                             <tbody id="tableBody"></tbody>
