@@ -130,7 +130,7 @@
         .edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
         .edu-indicator.active { background: var(--total-ice); width: 20px; }
 
-        /* --- PDF REVERTED DESIGN ENGINE: 1-PAGE PROFESSIONAL LETTERHEAD --- */
+        /* --- PDF DESIGN ENGINE: 1-PAGE PROFESSIONAL MINIMALIST --- */
         @media print {
             @page { 
                 size: letter portrait; 
@@ -152,41 +152,23 @@
                 max-width: 100% !important;
                 margin: 0 auto !important;
                 padding: 0 !important; 
-                zoom: 0.76; 
+                zoom: 0.78; 
             }
 
             .grid { display: block !important; }
             .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto 5px auto !important; }
 
-            /* Professional Letterhead: Logo Left, Text Right-Aligned with Rule */
-            .print-header {
-                display: flex !important;
-                flex-direction: row !important;
-                align-items: center !important;
-                justify-content: space-between !important;
-                padding: 15px 40px 10px 15px !important; /* 15px Safety Gaps */
-                margin-bottom: 10px !important;
-                border-bottom: 2px solid black !important; /* Separator Rule Reverted */
-            }
-            .print-header img { height: 50px !important; margin: 0 !important; }
-            .print-header h1 { 
-                font-size: 19pt !important; 
-                color: #000 !important; 
-                font-weight: 600 !important; /* Semi-bold Reverted */
-                text-align: right !important; 
-                letter-spacing: -0.01em !important;
-                margin: 0 !important; 
-                flex-grow: 1;
-            }
+            /* Header hidden as requested */
+            .print-header { display: none !important; }
 
-            /* Compact Summary Bar with Border Box Reverted */
+            /* Compact Summary Bar with Border Box - Top Element */
             .print-summary-bar {
                 display: flex !important;
                 justify-content: space-around !important;
                 background: #f8fafc !important;
                 border: 2px solid #000 !important; 
                 padding: 10px !important; 
-                margin: 0 15px 12px 15px !important;
+                margin: 40px 15px 15px 15px !important; /* Top margin for padding from edge */
                 font-weight: 800 !important;
                 text-transform: uppercase !important;
                 font-size: 11pt !important;
@@ -213,7 +195,7 @@
 
             /* Graph and Roadmap Scaling */
             .graph-container { margin-bottom: 10px !important; padding: 10px !important; border: 1.5px solid #eee !important; margin: 0 15px 10px 15px !important;}
-            canvas { max-height: 240px !important; width: 100% !important; }
+            canvas { max-height: 260px !important; width: 100% !important; }
 
             /* High-Contrast Roadmap Table */
             .roadmap-container { padding: 0 15px !important; }
@@ -237,7 +219,6 @@
         }
 
         .print-summary-bar { display: none; }
-        .print-header { display: none; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -264,14 +245,8 @@
         </div>
     </nav>
 
-    <!-- REVERTED PDF HEADER -->
-    <div class="print-header">
-        <img src="https://s12.gifyu.com/images/b39dH.png" alt="Paramount Logo">
-        <h1>Paramount Partner Performance Forecast</h1>
-    </div>
-
     <div class="max-w-7xl mx-auto px-6 py-8">
-        <!-- Reverted Summary Box (PDF Only) -->
+        <!-- Summary Box (Visible in PDF, Hidden in UI) -->
         <div class="print-summary-bar">
             <div>Target PSA: <span id="p-psa" class="text-total-red">125</span></div>
             <div>Selected Plan: <span id="p-plan" class="text-total-red">$50</span></div>
@@ -416,7 +391,7 @@
             {
                 title: "How You Get Paid",
                 subtitle: "Quick Cash + Stay Bonuses",
-                content: `<div class="space-y-4"><div class="stack-bar"><div class="stack-segment bg-total-red" style="width: 12%"></div><div class="stack-segment bg-total-ice" style="width: 88%"></div></div><div class="grid grid-cols-2 gap-4"><div><p class="text-[11px] font-black text-white italic uppercase">50% Quick Cash</p><p class="text-[8px] text-white/40 uppercase leading-none mt-1">Month 1</p></div><div><p class="text-[11px] font-black text-total-ice italic uppercase">375% Stay Bonus</p><p class="text-[8px] text-white/40 uppercase leading-none mt-1">Months 2-6</p></div></div><p class="text-[9px] font-bold text-white/50 leading-relaxed uppercase mt-3 italic">Month 1 covers costs. Mo 2 to 6 is pure profit.</p></div>`
+                content: `<div class="space-y-4"><div class="stack-bar"><div class="stack-segment bg-total-red" style="width: 12%"></div><div class="stack-segment bg-total-ice" style="width: 88%"></div></div><div class="grid grid-cols-2 gap-4"><div><p class="text-[11px] font-black text-white italic uppercase">50% Quick Cash</p><p class="text-[8px] text-white/40 uppercase leading-none mt-1">Month 1</p></div><div><p class="text-[11px] font-black text-total-ice italic uppercase">375% Stay Bonus</p><p class="text-[8px] text-white/40 uppercase mt-1">Months 2-6</p></div></div><p class="text-[9px] font-bold text-white/50 leading-relaxed uppercase mt-3 italic">Month 1 covers costs. Mo 2 to 6 is pure profit.</p></div>`
             },
             {
                 title: "Forever Money (17%)",
