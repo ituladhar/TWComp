@@ -1,0 +1,116 @@
+/* root Variables */
+:root {
+    --total-blue: #002d72;
+    --total-red: #ed1c24;
+    --total-ice: #00a3e0;
+    --total-dark: #0a1118;
+    --total-panel: #16212c;
+    --total-border: #2d3d4d;
+}
+
+/* Base Body Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--total-dark);
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    background-image: radial-gradient(circle at 50% 0%, rgba(0, 45, 114, 0.25) 0%, transparent 80%);
+}
+
+.brand-gradient {
+    background: linear-gradient(135deg, var(--total-blue) 0%, #001a45 100%);
+}
+
+/* Animations */
+@keyframes cta-attention {
+    0% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
+    50% { box-shadow: 0 0 25px 5px rgba(237, 28, 36, 0.4); transform: scale(1.02); }
+    100% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
+}
+
+/* Components */
+.join-cta {
+    background: linear-gradient(to right, #ed1c24, #c0161d);
+    animation: cta-attention 3s infinite ease-in-out;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.card-surface {
+    background-color: var(--total-panel);
+    border: 1px solid var(--total-border);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.kpi-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.2);
+    z-index: 10;
+}
+
+.kpi-card.ice-glow:hover { box-shadow: 0 20px 40px -10px rgba(0, 163, 224, 0.3); }
+.kpi-card.red-glow:hover { box-shadow: 0 20px 40px -10px rgba(237, 28, 36, 0.3); }
+
+.plan-card {
+    background-color: var(--total-panel);
+    border: 2px solid var(--total-border);
+    border-radius: 12px;
+    padding: 14px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.plan-card.active {
+    border-color: var(--total-red);
+    background-color: rgba(237, 28, 36, 0.08);
+}
+
+.preset-chip {
+    background: var(--total-border);
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #94a3b8;
+}
+
+.preset-chip.active {
+    background: var(--total-ice);
+    color: white;
+}
+
+/* Roadmap Table */
+.roadmap-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+.roadmap-table th {
+    background: rgba(0,0,0,0.5);
+    padding: 0.75rem 0.25rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: #475569;
+    border-bottom: 1px solid var(--total-border);
+    font-weight: 900;
+}
+
+.milestone-tag {
+    font-size: 0.55rem; padding: 1px 5px; border-radius: 2px; font-weight: 900;
+    background: var(--total-red); color: white; text-transform: uppercase;
+}
+
+.growth-badge {
+    font-size: 0.6rem; padding: 1px 4px; border-radius: 2px; font-weight: 900;
+    background: rgba(0, 163, 224, 0.1); color: var(--total-ice);
+}
+
+/* Intelligence Deck */
+.edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
+.edu-indicator.active { background: var(--total-ice); width: 20px; }
+.stack-bar { height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; display: flex; }
+
+/* Print Styles */
+@media print {
+    .no-print { display: none !important; }
+    body { background: white !important; color: #000 !important; background-image: none !important; }
+}
