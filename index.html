@@ -113,7 +113,7 @@
             line-height: 1.5;
         }
 
-        /* Inputs */
+        /* Inputs - Arrows Removed for PSA box */
         input[type="number"] {
             background-color: #0a1118;
             border: 2px solid var(--total-border);
@@ -126,7 +126,14 @@
             text-align: center;
             outline: none;
             transition: all 0.2s;
-            -moz-appearance: textfield; 
+            -moz-appearance: textfield; /* Hides arrows in Firefox */
+        }
+
+        /* Hides arrows in Chrome, Safari, Edge, Opera */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
 
         /* Roadmap Table */
@@ -466,8 +473,8 @@
                 data: {
                     labels: data.map(d => 'Month ' + d.month),
                     datasets: [
-                        { label: 'Total', data: data.map(d => d.total), borderColor: '#ed1c24', borderWidth: 4, fill: true, backgroundColor: gradient, tension: 0.4, yAxisID: 'y' },
-                        { label: 'Lines', data: data.map(d => d.activeBase), borderColor: '#00a3e0', borderWidth: 2, borderDash: [5, 5], fill: false, yAxisID: 'y1' }
+                        { label: 'Total', data: data.map(d => d.total), borderColor: '#ed1c24', borderWidth: 4, fill: true, backgroundColor: gradient, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#ed1c24', yAxisID: 'y' },
+                        { label: 'Lines', data: data.map(d => d.activeBase), borderColor: '#00a3e0', borderWidth: 2, borderDash: [5, 5], fill: false, yAxisID: 'y1', pointRadius: 4, pointBackgroundColor: '#00a3e0' }
                     ]
                 },
                 options: {
