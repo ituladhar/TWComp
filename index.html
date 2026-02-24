@@ -32,6 +32,7 @@
             background: linear-gradient(135deg, var(--total-blue) 0%, #001a45 100%);
         }
 
+        /* UI Attention Join Button */
         @keyframes cta-attention {
             0% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
             50% { box-shadow: 0 0 25px 5px rgba(237, 28, 36, 0.4); transform: scale(1.02); }
@@ -45,6 +46,7 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
+        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--total-dark); }
         ::-webkit-scrollbar-thumb { background: var(--total-border); border-radius: 10px; }
@@ -100,6 +102,7 @@
             letter-spacing: 0.12em;
         }
 
+        /* Large PSA Input for Web UI */
         input[type="number"] {
             background-color: #0a1118;
             border: 1px solid var(--total-border);
@@ -127,7 +130,7 @@
         .edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
         .edu-indicator.active { background: var(--total-ice); width: 20px; }
 
-        /* --- SENIOR DESIGNER PRINT ENGINE: 1-PAGE OPTIMIZED --- */
+        /* --- FINAL REFINED PRINT ENGINE: TIGHT ONE-PAGE DESIGN --- */
         @media print {
             @page { 
                 size: letter portrait; 
@@ -137,93 +140,79 @@
             
             body { 
                 background: white !important; 
-                color: #000 !important; 
+                color: black !important; 
                 background-image: none !important; 
-                height: 100vh;
-                overflow: hidden !important;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
+                height: 100vh;
+                overflow: hidden !important;
             }
 
             .max-w-7xl {
                 max-width: 100% !important;
                 margin: 0 auto !important;
-                padding: 0 !important; 
-                zoom: 0.78; /* Balanced zoom for single page fit */
+                padding: 0.5in 0 !important; /* Top padding for breathing room without header */
+                zoom: 0.76; 
             }
 
             .grid { display: block !important; }
-            .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto !important; }
+            .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto 2px auto !important; }
 
-            /* Professional Summary Box - Top Element with Breathing Room */
+            /* Compact Summary Bar with Border Box - NOW TOP ELEMENT */
             .print-summary-bar {
                 display: flex !important;
                 justify-content: space-around !important;
-                background: #fff !important;
-                border: 2px solid #000 !important;
-                padding: 12px !important; 
-                margin: 40px 0.85in 20px 0.85in !important;
+                background: #f8fafc !important;
+                border: 2px solid #000 !important; 
+                padding: 10px !important; 
+                margin: 0 40px 20px 40px !important;
                 font-weight: 800 !important;
                 text-transform: uppercase !important;
-                font-size: 11pt !important;
+                font-size: 12pt !important;
                 color: #000 !important;
                 border-radius: 4px !important;
             }
 
-            /* Balanced KPI Cards */
+            /* Tightened KPI Row */
             .kpi-row { 
                 display: grid !important; 
                 grid-template-columns: repeat(3, 1fr) !important; 
-                gap: 15px !important;
+                gap: 12px !important;
                 margin-bottom: 20px !important;
-                padding: 0 0.85in !important;
+                padding: 0 40px !important;
             }
             .kpi-card { 
                 background: #fff !important; 
                 border: 1px solid #000 !important; 
-                padding: 14px !important;
+                padding: 12px !important;
                 text-align: center !important;
             }
-            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 4px !important; font-size: 8pt !important; font-weight: 700 !important; }
-            .stat-value { color: #000 !important; font-size: 22pt !important; font-weight: 900 !important; line-height: 1 !important; }
+            .kpi-card p.stat-label { color: var(--total-blue) !important; margin-bottom: 2px !important; font-size: 7.5pt !important; }
+            .stat-value { color: black !important; font-size: 20pt !important; font-weight: 900 !important; }
 
-            /* FIXED GRAPH PROPORTION - Prevents vertical stretching */
-            .graph-container { 
-                margin: 0 0.85in 25px 0.85in !important; 
-                padding: 15px !important; 
-                border: 1px solid #ddd !important;
-                height: 300px !important; /* Adjusted height for elegant aspect ratio */
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: center !important;
-            }
-            canvas { 
-                height: 270px !important; /* Forces Chart.js to scale correctly */
-                width: 100% !important; 
-            }
+            /* Fixed Graph Container */
+            .graph-container { margin-bottom: 15px !important; padding: 10px !important; border: 1.5px solid #eee !important; margin: 0 40px 15px 40px !important;}
+            canvas { max-height: 240px !important; width: 100% !important; }
 
-            /* High-Contrast Professional Roadmap - Lowered for space */
-            .roadmap-container { 
-                padding: 0 0.85in !important; 
-            }
-            .roadmap-table { width: 100% !important; border: 1.5px solid #000 !important; border-collapse: collapse !important; }
-            .roadmap-table th { background: #f8fafc !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 6px !important; font-size: 9pt !important; }
+            /* TIGHTEST PERFORMANCE ROADMAP - FORCING 1 PAGE */
+            .roadmap-container { padding: 0 40px !important; }
+            .roadmap-table { width: 100% !important; margin: 0 auto !important; border: 1.5px solid #000 !important; border-collapse: collapse !important; }
+            .roadmap-table th { background: #f1f5f9 !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 4px !important; font-size: 9pt !important; }
             
-            /* Sharp Black Text Fix for contrast */
+            /* High Contrast Black Text for Table */
             .roadmap-row td { 
-                padding: 4px !important; 
+                padding: 3px !important; 
+                line-height: 1.1 !important;
                 border-bottom: 1px solid #eee !important; 
                 font-size: 9pt !important; 
                 color: #000000 !important; 
                 font-weight: 700 !important;
-                text-align: center !important;
             }
-            .roadmap-row td span { color: #000000 !important; opacity: 1 !important; }
-            .roadmap-row td:last-child { color: #002d72 !important; font-weight: 900 !important; }
+            .roadmap-row td span { color: #000000 !important; }
+            .roadmap-row td .text-total-ice { color: #002d72 !important; font-weight: 900 !important; }
 
             .card-surface { border: 1px solid #eee !important; background: #fff !important; box-shadow: none !important; }
             .min-h-\[280px\] { display: none !important; }
-            .print-header { display: none !important; }
         }
 
         .print-summary-bar { display: none; }
@@ -254,7 +243,7 @@
     </nav>
 
     <div class="max-w-7xl mx-auto px-6 py-8">
-        <!-- Compact Summary Box (PDF Only) -->
+        <!-- Centered Summary Box (PDF Only) -->
         <div class="print-summary-bar">
             <div>Target PSA: <span id="p-psa" class="text-total-red">125</span></div>
             <div>Selected Plan: <span id="p-plan" class="text-total-red">$50</span></div>
@@ -331,7 +320,7 @@
                 
                 <!-- KPI Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 kpi-row">
-                    <div class="card-surface kpi-card p-6 border-b-4 border-total-ice">
+                    <div class="card-surface kpi-card ice-glow p-6 border-b-4 border-total-ice">
                         <p class="stat-label mb-2">Total Value / Act</p>
                         <div class="flex items-baseline justify-center gap-1">
                             <span class="text-xl font-bold text-total-ice">$</span>
@@ -339,7 +328,7 @@
                         </div>
                     </div>
 
-                    <div class="card-surface kpi-card p-6 border-b-4 border-total-red">
+                    <div class="card-surface kpi-card red-glow p-6 border-b-4 border-total-red">
                         <p class="stat-label mb-2">Month 6 Payout</p>
                         <div class="flex items-baseline justify-center gap-1">
                             <span class="text-xl font-bold text-total-red">$</span>
@@ -347,7 +336,7 @@
                         </div>
                     </div>
 
-                    <div class="card-surface kpi-card brand-gradient p-6 border-b-4 border-total-ice shadow-2xl overflow-hidden">
+                    <div class="card-surface kpi-card ice-glow brand-gradient p-6 border-b-4 border-total-ice shadow-2xl overflow-hidden">
                         <p class="stat-label mb-2 text-total-ice/80">1-Year Total Profit</p>
                         <div class="flex items-baseline justify-center gap-1">
                             <span class="text-xl font-bold text-total-ice">$</span>
@@ -359,8 +348,8 @@
                 <!-- Money Growth Plan -->
                 <div class="card-surface p-6 graph-container">
                     <h3 class="text-sm font-black uppercase tracking-widest text-total-ice mb-4 italic text-center no-print">Projected Revenue Trajectory</h3>
-                    <h3 class="hidden print:block text-xs font-black uppercase tracking-widest text-gray-800 mb-4 text-center">Projected Revenue Trajectory</h3>
-                    <div class="flex-grow">
+                    <h3 class="hidden print:block text-xs font-black uppercase tracking-widest text-gray-800 mb-2 text-center">Projected Revenue Trajectory</h3>
+                    <div class="h-[280px] print:h-[240px]">
                         <canvas id="compChart"></canvas>
                     </div>
                 </div>
@@ -374,11 +363,11 @@
                         <table class="roadmap-table w-full">
                             <thead>
                                 <tr>
-                                    <th class="px-4 w-28 italic">Month</th>
-                                    <th class="text-right">Lines</th>
-                                    <th class="text-right">Cash</th>
-                                    <th class="text-right">Bonus</th>
-                                    <th class="text-right">Residual</th>
+                                    <th class="text-left px-4 w-28 italic">Period</th>
+                                    <th class="text-right px-2">Lines</th>
+                                    <th class="text-right px-2">Cash</th>
+                                    <th class="text-right px-2">Bonus</th>
+                                    <th class="text-right px-2">Residual</th>
                                     <th class="text-right px-4">Total Pay</th>
                                 </tr>
                             </thead>
@@ -517,11 +506,11 @@
                 tr.className = "roadmap-row";
                 let tag = row.month === 1 ? `<br><span class="milestone-tag">Launch</span>` : (row.month === 6 ? `<br><span class="milestone-tag" style="background:var(--total-ice)">Peak</span>` : "");
                 tr.innerHTML = `
-                    <td class="px-4 py-3"><span class="font-black italic text-sm uppercase">M${row.month < 10 ? '0'+row.month : row.month}</span>${tag}</td>
-                    <td class="text-right"><span class="font-bold">${row.activeBase.toLocaleString()}</span></td>
-                    <td class="text-right font-bold">$${Math.round(row.instant).toLocaleString()}</td>
-                    <td class="text-right font-bold">$${Math.round(row.retention).toLocaleString()}</td>
-                    <td class="text-right font-bold">$${Math.round(row.resid).toLocaleString()}</td>
+                    <td class="px-4 py-3"><span class="font-black text-gray-500 italic text-sm uppercase">M${row.month < 10 ? '0'+row.month : row.month}</span>${tag}</td>
+                    <td class="px-2 py-3 text-right"><span class="font-bold text-white text-[0.9rem]">${row.activeBase.toLocaleString()}</span></td>
+                    <td class="px-2 py-3 text-right text-gray-300 font-bold">$${Math.round(row.instant).toLocaleString()}</td>
+                    <td class="px-2 py-3 text-right text-gray-300 font-bold">$${Math.round(row.retention).toLocaleString()}</td>
+                    <td class="px-2 py-3 text-right text-gray-300 font-bold">$${Math.round(row.resid).toLocaleString()}</td>
                     <td class="px-4 py-3 text-right font-black text-total-ice text-base">$${Math.round(row.total).toLocaleString()}</td>
                 `;
                 tbody.appendChild(tr);
