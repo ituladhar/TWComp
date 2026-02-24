@@ -32,15 +32,17 @@
             background: linear-gradient(135deg, var(--total-blue) 0%, #001a45 100%);
         }
 
-        /* Attention-Grabbing CTA Pulse */
-        @keyframes cta-pulse {
-            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.7); }
-            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(237, 28, 36, 0); }
-            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(237, 28, 36, 0); }
+        /* High-Visibility Join CTA */
+        @keyframes cta-attention {
+            0% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
+            50% { box-shadow: 0 0 25px 5px rgba(237, 28, 36, 0.4); transform: scale(1.02); }
+            100% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
         }
 
-        .pulse-button {
-            animation: cta-pulse 2s infinite;
+        .join-cta {
+            background: linear-gradient(to right, #ed1c24, #c0161d);
+            animation: cta-attention 3s infinite ease-in-out;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         /* Custom Scrollbar */
@@ -65,7 +67,7 @@
             box-shadow: 0 10px 20px -10px rgba(237, 28, 36, 0.2);
         }
 
-        /* Preset Chips */
+        /* Preset Chips - Theme Color Correction */
         .preset-chip {
             background: var(--total-border);
             padding: 6px 14px;
@@ -75,7 +77,7 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s;
-            color: #94a3b8;
+            color: #94a3b8; /* Professional Slate */
             border: 1px solid transparent;
         }
         .preset-chip:hover { background: #4b5563; color: white; }
@@ -190,11 +192,11 @@
         .stack-bar { height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; display: flex; }
         .stack-segment { height: 100%; transition: width 0.5s ease; }
 
-        /* FIX: Optimized Print Styles for Single-Page PDF Output */
+        /* FIX: ADVANCED PRINT OPTIMIZATION FOR SINGLE-PAGE PDF */
         @media print {
             @page {
-                size: A4 portrait;
-                margin: 0.5cm;
+                size: letter portrait;
+                margin: 0.2in;
             }
             
             .no-print { display: none !important; }
@@ -203,45 +205,58 @@
                 background: white !important; 
                 color: #000 !important; 
                 background-image: none !important;
-                font-size: 10pt;
-                zoom: 0.85; /* Adjust scaling to fit more content on one page */
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
             }
 
-            nav { 
-                background: white !important; 
-                border-bottom: 2px solid #eee !important;
-                padding-bottom: 1rem !important;
+            /* Single Page Containment */
+            .max-w-7xl {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                transform: scale(0.85); /* Shrink content to fit height */
+                transform-origin: top center;
             }
+
+            .grid { 
+                display: grid !important; 
+                grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+                gap: 15px !important;
+            }
+
+            .lg\:col-span-4 { grid-column: span 4 / span 4 !important; }
+            .lg\:col-span-8 { grid-column: span 8 / span 8 !important; }
 
             .card-surface { 
-                background: white !important; 
-                border: 1px solid #ddd !important; 
+                background: #fdfdfd !important; 
+                border: 1px solid #ccc !important; 
                 color: #000 !important;
-                break-inside: avoid; /* Prevent split across pages */
-                margin-bottom: 1rem !important;
-                box-shadow: none !important;
-                transition: none !important;
-                transform: none !important;
+                break-inside: avoid;
+                margin-bottom: 10px !important;
+                padding: 15px !important;
             }
 
-            .stat-label { color: var(--total-blue) !important; }
+            .stat-label { color: var(--total-blue) !important; font-weight: bold !important; }
             .stat-value { color: #000 !important; }
             .text-white { color: #000 !important; }
-            .text-gray-500, .text-gray-400, .text-gray-300 { color: #444 !important; }
-            .text-total-ice { color: var(--total-ice) !important; }
-            .text-total-red { color: var(--total-red) !important; }
+            .text-total-ice { color: #007bb0 !important; }
+            .text-total-red { color: #d01010 !important; }
             
-            /* Highlighting results for readability */
-            .roadmap-table th { background: #f8f9fa !important; border-bottom: 1px solid #000 !important; color: #000 !important; }
-            .roadmap-row { border-bottom: 1px solid #eee !important; }
+            /* Clean up roadmap for print */
+            .roadmap-table th { background: #f0f0f0 !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; }
+            .roadmap-row td { border-bottom: 1px solid #ddd !important; padding: 8px !important; }
             
-            .brand-gradient { background: #f8f9fa !important; border: 1px solid #ddd !important; }
+            /* Strategic Deck sizing for print */
+            .min-h-\[280px\] { min-height: 200px !important; }
             
-            /* Chart optimization */
-            canvas { max-height: 250px !important; }
-            
-            /* Force the layout into a cleaner single column/stack if needed, 
-               but portrait A4 should handle the dashboard well at 85% zoom. */
+            /* Chart height restriction */
+            canvas { max-height: 220px !important; width: 100% !important; }
+
+            /* Ensure everything stays on one page */
+            html, body {
+                height: 99vh;
+                overflow: hidden !important;
+            }
         }
     </style>
 </head>
@@ -260,8 +275,8 @@
                 </div>
             </div>
             <div class="flex items-center gap-4">
-                <!-- Highlighted CTA -->
-                <a href="https://submissions.p-wireless.com/r/sub-agent-application" target="_blank" class="pulse-button text-[11px] font-black bg-total-red hover:bg-red-600 text-white px-6 py-2.5 rounded-full transition-all uppercase tracking-widest shadow-[0_0_20px_rgba(237,28,36,0.4)] border border-white/10">
+                <!-- REDESIGNED HIGH-VISIBILITY CTA -->
+                <a href="https://submissions.p-wireless.com/r/sub-agent-application" target="_blank" class="join-cta text-[11px] font-black text-white px-7 py-2.5 rounded-full transition-all uppercase tracking-widest">
                     Join Paramount
                 </a>
                 <button onclick="window.print()" class="text-[10px] font-black text-gray-400 hover:text-white border border-gray-800 px-4 py-2.5 rounded-full transition-all uppercase tracking-widest">
@@ -270,14 +285,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- Content meant for printing might need a clean header if nav is hidden -->
-    <div class="hidden print:block mb-6">
-        <div class="flex justify-between items-center border-b-2 border-black pb-4">
-            <h1 class="text-2xl font-black italic tracking-tighter uppercase">Paramount Partner Growth Model</h1>
-            <p class="text-xs font-bold uppercase tracking-widest">2025 Performance Forecast</p>
-        </div>
-    </div>
 
     <div class="max-w-7xl mx-auto px-6 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -326,7 +333,7 @@
                                 <div class="flex justify-between items-end mb-2 relative group">
                                     <label class="stat-label text-gray-500 cursor-help border-b border-dotted border-gray-600 uppercase">Projected Churn Rate</label>
                                     
-                                    <div class="absolute bottom-full left-0 mb-3 hidden group-hover:block w-64 p-3 bg-[#1e293b] border border-gray-700 text-[10px] text-gray-300 rounded-lg shadow-2xl z-50 leading-relaxed pointer-events-none italic">
+                                    <div class="absolute bottom-full left-0 mb-3 hidden group-hover:block w-64 p-3 bg-[#1e293b] border border-gray-700 text-[10px] text-gray-300 rounded-lg shadow-2xl z-50 leading-relaxed pointer-events-none italic no-print">
                                         <strong class="text-total-ice block mb-1 uppercase not-italic font-black">What is Churn Rate?</strong>
                                         The percentage of customers who stop service each month. This reduces your active base and lowers your <span class="text-total-red font-bold">Stay Bonus</span> payments.
                                     </div>
@@ -340,12 +347,12 @@
                 </div>
 
                 <!-- Strategic Growth Intelligence Deck -->
-                <div class="card-surface p-6 brand-gradient border-none relative overflow-hidden min-h-[280px] flex flex-col justify-between shadow-2xl no-print">
+                <div class="card-surface p-6 brand-gradient border-none relative overflow-hidden min-h-[280px] flex flex-col justify-between shadow-2xl">
                     <div id="eduContent">
                         <!-- Dynamic Strategic Content -->
                     </div>
                     
-                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/10">
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/10 no-print">
                         <div class="flex gap-1.5" id="eduIndicators"></div>
                         <button onclick="nextEduSlide()" class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition-all text-white/80">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
@@ -357,8 +364,9 @@
             <!-- Main Panel -->
             <div class="lg:col-span-8 space-y-8">
                 
-                <!-- Primary KPIs -->
+                <!-- Primary KPIs with Hover Effects -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- KPI 1 -->
                     <div class="card-surface kpi-card ice-glow p-6 border-b-4 border-total-ice cursor-default">
                         <p class="stat-label mb-2">Total Value Per Sale</p>
                         <div class="flex items-baseline gap-1">
@@ -367,7 +375,7 @@
                         </div>
                         <div class="mt-4 pt-3 border-t border-gray-800">
                             <p class="stat-detail">Considered in Calculation:</p>
-                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed">
+                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed uppercase">
                                 • 50% Upfront Spiff<br>
                                 • 375% Stacked Retention<br>
                                 • 17% Airtime Rev-Share<br>
@@ -376,6 +384,7 @@
                         </div>
                     </div>
 
+                    <!-- KPI 2 -->
                     <div class="card-surface kpi-card red-glow p-6 border-b-4 border-total-red cursor-default">
                         <p class="stat-label mb-2">Month 6 Paycheck</p>
                         <div class="flex items-baseline gap-1">
@@ -384,15 +393,16 @@
                         </div>
                         <div class="mt-4 pt-3 border-t border-gray-800">
                             <p class="stat-detail">Considered in Calculation:</p>
-                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed">
+                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed uppercase">
                                 • Current Month Instant Spiff<br>
                                 • <span class="text-total-red">Stacked M2-M6 Bonus</span><br>
                                 • Base Residuals & Airtime<br>
-                                • Sales Volume x Achievement
+                                • Sale Volume x Achievement
                             </p>
                         </div>
                     </div>
 
+                    <!-- KPI 3 -->
                     <div class="card-surface kpi-card ice-glow brand-gradient p-6 border-b-4 border-total-ice shadow-2xl relative overflow-hidden group cursor-default">
                         <div class="relative z-10">
                             <p class="stat-label mb-2 text-total-ice/80">Total 1-Year Profit</p>
@@ -402,7 +412,7 @@
                             </div>
                             <div class="mt-4 pt-3 border-t border-white/10">
                                 <p class="stat-detail text-white/60">Considered in Calculation:</p>
-                                <p class="text-[9px] text-white/40 mt-1 leading-relaxed">
+                                <p class="text-[9px] text-white/40 mt-1 leading-relaxed uppercase">
                                     • 12-Month Aggregate Revenue<br>
                                     • Continuous Growth Model<br>
                                     • All Bonus Tiers Combined<br>
@@ -421,7 +431,7 @@
                             <h3 class="text-sm font-black uppercase tracking-widest text-total-ice italic">Money Growth Plan</h3>
                             <p class="text-[10px] text-gray-500 font-bold uppercase tracking-tight">How your monthly check grows over 1 year</p>
                         </div>
-                        <div class="flex gap-4">
+                        <div class="flex gap-4 no-print">
                             <div class="flex items-center gap-2">
                                 <span class="w-2.5 h-2.5 rounded-full bg-total-red shadow-[0_0_10px_#ed1c24]"></span>
                                 <span class="text-[10px] font-black uppercase text-gray-400 tracking-tighter">Monthly Pay</span>
@@ -432,7 +442,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="h-[340px]">
+                    <div class="h-[340px] print:h-[220px]">
                         <canvas id="compChart"></canvas>
                     </div>
                 </div>
@@ -441,7 +451,7 @@
                 <div class="card-surface overflow-hidden">
                     <div class="p-4 border-b border-gray-800 bg-gray-900/30">
                         <h3 class="text-xs font-black uppercase tracking-[0.2em] text-total-ice italic">Performance Roadmap</h3>
-                        <p class="text-[9px] text-gray-500 font-bold uppercase mt-1 italic">12-Month Financial Projection Model</p>
+                        <p class="text-[9px] text-gray-500 font-bold uppercase mt-1">12-Month Money Projection</p>
                     </div>
                     <div class="w-full">
                         <table class="roadmap-table">
@@ -470,40 +480,27 @@
 
         const eduSlides = [
             {
-                title: "Fighter Brand Strategy",
-                subtitle: "Winning the Metro and Cricket Market",
+                title: "How You Get Paid",
+                subtitle: "Quick Cash + Stay Bonuses",
                 content: `
                     <div class="space-y-4">
-                        <div class="bg-black/20 p-3 rounded border border-white/5">
-                            <p class="text-[9px] font-bold text-white/60 leading-relaxed uppercase">
-                                Eliminate customer pain points: <span class="text-total-ice">No Activation Fees</span>, <span class="text-total-ice">No Hidden Taxes</span>, and America's fastest 5G speeds.
-                            </p>
+                        <div class="stack-bar">
+                            <div class="stack-segment bg-total-red" style="width: 12%"></div>
+                            <div class="stack-segment bg-total-ice" style="width: 88%"></div>
                         </div>
                         <div class="grid grid-cols-2 gap-4">
-                            <div><p class="text-[11px] font-black text-white italic uppercase">Quick Cash</p><p class="text-[8px] text-white/40 uppercase">Operational Seed</p></div>
-                            <div><p class="text-[11px] font-black text-total-ice italic uppercase">Stay Bonus</p><p class="text-[8px] text-white/40 uppercase">Profit Wealth</p></div>
+                            <div><p class="text-[11px] font-black text-white italic uppercase">50% Quick Cash</p><p class="text-[8px] text-white/40 uppercase">Paid Month 1</p></div>
+                            <div><p class="text-[11px] font-black text-total-ice italic uppercase">375% Stay Bonus</p><p class="text-[8px] text-white/40 uppercase">Paid Months 2-6</p></div>
                         </div>
-                    </div>
-                `
-            },
-            {
-                title: "12X Faster Network Edge",
-                subtitle: "Leveraging Verizon 5G Power",
-                content: `
-                    <div class="space-y-3">
-                        <div class="bg-white/5 p-3 rounded-lg border border-white/5 flex items-center gap-3">
-                            <div class="w-2 h-2 rounded-full bg-total-red"></div>
-                            <p class="text-[10px] font-bold text-white uppercase italic">12X Faster Unlimited Data</p>
-                        </div>
-                        <p class="text-[9px] font-bold text-white/50 leading-relaxed italic uppercase">
-                            Superior network speed drives word-of-mouth growth and lowers customer loss.
+                        <p class="text-[9px] font-bold text-white/50 leading-relaxed uppercase">
+                            Month 1 covers your costs (50%). Month 2 to 6 is your pure profit (75% x 5).
                         </p>
                     </div>
                 `
             },
             {
                 title: "Forever Money (17%)",
-                subtitle: "The Paramount Residual Moat",
+                subtitle: "Money paid every single month",
                 content: `
                     <div class="space-y-4">
                         <div class="grid grid-cols-2 gap-4">
@@ -516,50 +513,50 @@
                                 <p class="text-[8px] font-black text-white/40 uppercase mt-1 leading-none">Autopay</p>
                             </div>
                         </div>
-                        <p class="text-[9px] font-bold text-white/60 text-center uppercase italic leading-tight">
-                            Combined 17% yield on every active line in your portfolio, every single month.
+                        <p class="text-[9px] font-bold text-white/60 text-center uppercase italic">
+                            You get 17% of the plan cost every month for as long as the customer stays.
                         </p>
                     </div>
                 `
             },
             {
-                title: "Portfolio Snowball",
-                subtitle: "Wealth stacking in action",
+                title: "The Snowball Effect",
+                subtitle: "Building your Monthly check",
                 content: `
                     <div class="space-y-3">
                         <div class="bg-white/5 p-3 rounded-lg border border-white/5 flex items-center gap-3">
                             <div class="w-1.5 h-8 bg-total-red rounded"></div>
                             <div>
-                                <p class="text-[11px] font-black text-white italic uppercase leading-none">The Stack Effect</p>
-                                <p class="text-[8px] text-white/40 font-bold uppercase mt-1 leading-none">Revenue scales as cohorts overlap</p>
+                                <p class="text-[11px] font-black text-white italic uppercase leading-none">More Lines = More $</p>
+                                <p class="text-[8px] text-white/40 font-bold uppercase mt-1 leading-none">Your monthly check grows fast</p>
                             </div>
                         </div>
                         <div class="bg-white/5 p-3 rounded-lg border border-white/5 flex items-center gap-3">
                             <div class="w-1.5 h-8 bg-total-ice rounded"></div>
                             <div>
-                                <p class="text-[11px] font-black text-white italic uppercase leading-none">Base Value</p>
-                                <p class="text-[8px] text-white/40 font-bold uppercase mt-1 leading-none">Portfolio money grows with line count</p>
+                                <p class="text-[11px] font-black text-white italic uppercase leading-none">Stay Bonus Stacks</p>
+                                <p class="text-[8px] text-white/40 font-bold uppercase mt-1 leading-none">New bonuses add on top of old ones</p>
                             </div>
                         </div>
                     </div>
                 `
             },
             {
-                title: "Success Habits",
-                subtitle: "Simple steps for more profit",
+                title: "3 Ways to Win",
+                subtitle: "Simple steps for more money",
                 content: `
                     <div class="space-y-2">
-                        <div class="bg-white/5 p-2 rounded border border-white/10 flex items-center gap-3 mb-1">
+                        <div class="bg-white/5 p-3 rounded border border-white/10 flex items-center gap-3 mb-1">
                             <span class="text-total-ice font-black">01</span>
-                            <span class="text-[9px] font-bold text-white/80 uppercase">Keep Customer 3 Months+</span>
+                            <span class="text-[10px] font-bold text-white/80 uppercase">Keep Customer 3 Months+</span>
                         </div>
-                        <div class="bg-white/5 p-2 rounded border border-white/10 flex items-center gap-3 mb-1">
+                        <div class="bg-white/5 p-3 rounded border border-white/10 flex items-center gap-3 mb-1">
                             <span class="text-total-ice font-black">02</span>
-                            <span class="text-[9px] font-bold text-white/80 uppercase">Sell Family Plans</span>
+                            <span class="text-[10px] font-bold text-white/80 uppercase">Sell Family Plans</span>
                         </div>
-                        <div class="bg-white/5 p-2 rounded border border-white/10 flex items-center gap-3">
+                        <div class="bg-white/5 p-3 rounded border border-white/10 flex items-center gap-3">
                             <span class="text-total-ice font-black">03</span>
-                            <span class="text-[9px] font-bold text-white/80 uppercase">Bring Numbers from Others</span>
+                            <span class="text-[10px] font-bold text-white/80 uppercase">Bring Numbers from Others</span>
                         </div>
                     </div>
                 `
