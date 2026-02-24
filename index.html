@@ -103,16 +103,31 @@
             letter-spacing: 0.12em;
         }
 
+        /* Updated Number Input: Larger and No Arrows */
         input[type="number"] {
             background-color: #0a1118;
             border: 1px solid var(--total-border);
-            border-radius: 4px;
-            padding: 4px 8px;
+            border-radius: 6px;
+            padding: 6px 12px;
             color: var(--total-ice);
             font-weight: 900;
-            font-size: 0.85rem;
-            width: 70px;
+            font-size: 1.5rem; /* Larger font */
+            width: 100px; /* Wider to accommodate font */
             text-align: center;
+            outline: none;
+            transition: border-color 0.2s;
+            -moz-appearance: textfield; /* Hide arrows for Firefox */
+        }
+        
+        input[type="number"]:focus {
+            border-color: var(--total-ice);
+        }
+
+        /* Hide arrows for Chrome, Safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
         }
 
         .roadmap-table th { background: rgba(0,0,0,0.3); padding: 1rem 0.75rem; font-size: 0.65rem; text-transform: uppercase; color: #64748b; border-bottom: 2px solid var(--total-border); }
