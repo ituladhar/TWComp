@@ -124,12 +124,13 @@
         .roadmap-table th { background: rgba(0,0,0,0.3); padding: 1rem 0.75rem; font-size: 0.65rem; text-transform: uppercase; color: #64748b; border-bottom: 2px solid var(--total-border); }
         .roadmap-row { transition: all 0.2s ease; border-bottom: 1px solid rgba(255,255,255,0.03); }
 
+        /* Intelligence Deck Styling */
         #eduContent { transition: opacity 0.4s ease-in-out; }
         .edu-fade { opacity: 0; }
         .edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
         .edu-indicator.active { background: var(--total-ice); width: 20px; }
 
-        /* --- PDF DESIGNER ENGINE: OPTIMIZED ONE-PAGE LETTERHEAD --- */
+        /* --- FINAL REFINED PRINT ENGINE: TIGHT ONE-PAGE DESIGN --- */
         @media print {
             @page { 
                 size: letter portrait; 
@@ -151,95 +152,84 @@
                 max-width: 100% !important;
                 margin: 0 auto !important;
                 padding: 0 !important; 
-                zoom: 0.78; /* Balanced zoom for single page height usage */
+                zoom: 0.76; 
             }
 
             .grid { display: block !important; }
-            .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto 5px auto !important; }
+            .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto 2px auto !important; }
 
-            /* Professional Letterhead: Logo Left (65px gap), Title Right */
+            /* Header: Logo Left (15px gap), Text Right-Aligned */
             .print-header {
                 display: flex !important;
                 flex-direction: row !important;
                 align-items: center !important;
                 justify-content: space-between !important;
-                padding: 65px 65px 20px 65px !important; /* Proper safety gap */
-                margin-bottom: 15px !important;
-                border-bottom: none !important; 
+                padding: 15px 40px 10px 15px !important; /* 15px Top/Left Safety Gap */
+                margin-bottom: 10px !important;
+                border-bottom: 1px solid #ddd !important;
             }
-            .print-header img { height: 65px !important; margin: 0 !important; }
+            .print-header img { height: 50px !important; margin: 0 !important; }
             .print-header h1 { 
-                font-size: 22pt !important; 
+                font-size: 19pt !important; 
                 color: #000 !important; 
-                font-weight: 300 !important; 
+                font-weight: 300 !important; /* Elegant Light Weight */
                 text-align: right !important; 
                 letter-spacing: -0.01em !important;
                 margin: 0 !important; 
                 flex-grow: 1;
-                text-transform: capitalize !important; 
             }
 
-            /* Restored Summary Box: Visible & Bold */
+            /* Compact Summary Bar with Border Box */
             .print-summary-bar {
                 display: flex !important;
                 justify-content: space-around !important;
                 background: #f8fafc !important;
-                border: 2.5px solid #000 !important; 
-                padding: 15px !important; 
-                margin: 0 65px 25px 65px !important; 
+                border: 2px solid #000 !important; /* Restored Box */
+                padding: 10px !important; 
+                margin: 0 15px 12px 15px !important;
                 font-weight: 800 !important;
                 text-transform: uppercase !important;
-                font-size: 14pt !important; 
+                font-size: 11pt !important;
                 color: #000 !important;
-                border-radius: 6px !important;
+                border-radius: 4px !important;
             }
 
-            /* KPI Row - Better Vertical Spacing */
+            /* Tightened KPI Row */
             .kpi-row { 
                 display: grid !important; 
                 grid-template-columns: repeat(3, 1fr) !important; 
-                gap: 20px !important;
-                margin-bottom: 30px !important;
-                padding: 0 65px !important;
+                gap: 12px !important;
+                margin-bottom: 12px !important;
+                padding: 0 15px !important;
             }
             .kpi-card { 
                 background: #fff !important; 
-                border: 2px solid #000 !important; 
-                padding: 18px !important;
+                border: 1px solid #000 !important; 
+                padding: 10px !important;
                 text-align: center !important;
             }
-            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 4px !important; font-size: 8pt !important; }
-            .stat-value { color: black !important; font-size: 24pt !important; font-weight: 900 !important; }
+            .kpi-card p.stat-label { color: var(--total-blue) !important; margin-bottom: 2px !important; font-size: 7.5pt !important; }
+            .stat-value { color: black !important; font-size: 18pt !important; font-weight: 900 !important; }
 
-            /* Fixed Graph Container - Uses Bottom Space Instead of Stretching */
-            .graph-container { 
-                margin: 0 65px 30px 65px !important;
-                padding: 20px !important; 
-                border: 1.5px solid #eee !important; 
-                height: 420px !important; /* Increased height to use bottom space */
-                display: flex !important;
-                flex-direction: column !important;
-                justify-content: center !important;
-            }
-            canvas { 
-                height: 380px !important; /* Elegant vertical scale */
-                width: 100% !important; 
-            }
+            /* Fixed Graph Container */
+            .graph-container { margin-bottom: 10px !important; padding: 10px !important; border: 1.5px solid #eee !important; margin: 0 15px 10px 15px !important;}
+            canvas { max-height: 240px !important; width: 100% !important; }
 
-            /* High-Contrast Roadmap Table */
-            .roadmap-container { padding: 0 65px !important; }
-            .roadmap-table { width: 100% !important; margin: 0 auto !important; border: 2px solid #000 !important; border-collapse: collapse !important; }
-            .roadmap-table th { background: #f1f5f9 !important; color: #000 !important; border-bottom: 2px solid #000 !important; padding: 6px !important; font-size: 10pt !important; }
+            /* TIGHTEST PERFORMANCE ROADMAP - FORCING 1 PAGE */
+            .roadmap-container { padding: 0 15px !important; }
+            .roadmap-table { width: 100% !important; margin: 0 auto !important; border: 1.5px solid #000 !important; border-collapse: collapse !important; }
+            .roadmap-table th { background: #f1f5f9 !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 4px !important; font-size: 8.5pt !important; }
             
-            /* Pure Black Font for sharp printing */
+            /* High Contrast Black Text for Table */
             .roadmap-row td { 
-                padding: 6px !important; 
-                border-bottom: 1px solid #ddd !important; 
-                font-size: 10pt !important; 
-                color: #000000 !important; 
+                padding: 3px !important; /* Reduced padding to tighten table */
+                line-height: 1.1 !important;
+                border-bottom: 1px solid #eee !important; 
+                font-size: 8.5pt !important; 
+                color: #000000 !important; /* Sharp pure black */
                 font-weight: 700 !important;
             }
-            .roadmap-row td span, .roadmap-row td p { color: #000000 !important; opacity: 1 !important; }
+            .roadmap-row td span { color: #000000 !important; }
             .roadmap-row td .text-total-ice { color: #002d72 !important; font-weight: 900 !important; }
 
             .card-surface { border: 1px solid #eee !important; background: #fff !important; box-shadow: none !important; }
@@ -274,14 +264,14 @@
         </div>
     </nav>
 
-    <!-- DESIGNER PDF HEADER: LOGO LEFT (SAFETY MARGINS), TITLE RIGHT -->
+    <!-- PDF HEADER: LOGO LEFT (15PX), TITLE RIGHT-ALIGNED -->
     <div class="print-header">
         <img src="https://s12.gifyu.com/images/b39dH.png" alt="Paramount Logo">
         <h1>Paramount Partner Performance Forecast</h1>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 py-8">
-        <!-- Summary Box for PDF Export -->
+        <!-- Centered Summary Box (PDF Only) -->
         <div class="print-summary-bar">
             <div>Target PSA: <span id="p-psa" class="text-total-red">125</span></div>
             <div>Selected Plan: <span id="p-plan" class="text-total-red">$50</span></div>
@@ -387,7 +377,7 @@
                 <div class="card-surface p-6 graph-container">
                     <h3 class="text-sm font-black uppercase tracking-widest text-total-ice mb-4 italic text-center no-print">Projected Revenue Trajectory</h3>
                     <h3 class="hidden print:block text-xs font-black uppercase tracking-widest text-gray-800 mb-2 text-center">Projected Revenue Trajectory</h3>
-                    <div class="h-[280px] print:h-[380px]">
+                    <div class="h-[280px] print:h-[240px]">
                         <canvas id="compChart"></canvas>
                     </div>
                 </div>
@@ -426,7 +416,7 @@
             {
                 title: "How You Get Paid",
                 subtitle: "Quick Cash + Stay Bonuses",
-                content: `<div class="space-y-4"><div class="stack-bar"><div class="stack-segment bg-total-red" style="width: 12%"></div><div class="stack-segment bg-total-ice" style="width: 88%"></div></div><div class="grid grid-cols-2 gap-4"><div><p class="text-[11px] font-black text-white italic uppercase">50% Quick Cash</p><p class="text-[8px] text-white/40 uppercase leading-none mt-1">Month 1</p></div><div><p class="text-[11px] font-black text-total-ice italic uppercase">375% Stay Bonus</p><p class="text-[8px] text-white/40 uppercase leading-none mt-1">Months 2-6</p></div></div><p class="text-[9px] font-bold text-white/50 leading-relaxed uppercase mt-3 italic">Month 1 covers costs. Mo 2 to 6 is pure profit.</p></div>`
+                content: `<div class="space-y-4"><div class="stack-bar"><div class="stack-segment bg-total-red" style="width: 12%"></div><div class="stack-segment bg-total-ice" style="width: 88%"></div></div><div class="grid grid-cols-2 gap-4"><div><p class="text-[11px] font-black text-white italic uppercase">50% Quick Cash</p><p class="text-[8px] text-white/40 uppercase mt-1 leading-none">Month 1</p></div><div><p class="text-[11px] font-black text-total-ice italic uppercase">375% Stay Bonus</p><p class="text-[8px] text-white/40 uppercase mt-1">Months 2-6</p></div></div><p class="text-[9px] font-bold text-white/50 leading-relaxed uppercase mt-3 italic">Month 1 covers costs. Mo 2 to 6 is pure profit.</p></div>`
             },
             {
                 title: "Forever Money (17%)",
@@ -504,7 +494,7 @@
             const churnRate = parseInt(document.getElementById('churn').value) / 100;
             document.getElementById('churnDisplay').innerText = (churnRate * 100).toFixed(0) + '%';
 
-            // Sync print summary values
+            // PDF Sync
             document.getElementById('p-psa').innerText = monthlyPSA;
             document.getElementById('p-plan').innerText = '$' + planPrice;
             document.getElementById('p-churn').innerText = (churnRate * 100).toFixed(0) + '%';
