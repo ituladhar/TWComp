@@ -65,7 +65,7 @@
             box-shadow: 0 10px 20px -10px rgba(237, 28, 36, 0.2);
         }
 
-        /* Preset Chips - Color Correction */
+        /* Preset Chips */
         .preset-chip {
             background: var(--total-border);
             padding: 6px 14px;
@@ -75,7 +75,7 @@
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.2s;
-            color: #94a3b8; /* Slate Gray */
+            color: #94a3b8;
             border: 1px solid transparent;
         }
         .preset-chip:hover { background: #4b5563; color: white; }
@@ -190,10 +190,58 @@
         .stack-bar { height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; display: flex; }
         .stack-segment { height: 100%; transition: width 0.5s ease; }
 
+        /* FIX: Optimized Print Styles for Single-Page PDF Output */
         @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0.5cm;
+            }
+            
             .no-print { display: none !important; }
-            body { background: white !important; color: black !important; background-image: none !important; }
-            .card-surface { border: 1px solid #ccc !important; color: black !important; }
+            
+            body { 
+                background: white !important; 
+                color: #000 !important; 
+                background-image: none !important;
+                font-size: 10pt;
+                zoom: 0.85; /* Adjust scaling to fit more content on one page */
+            }
+
+            nav { 
+                background: white !important; 
+                border-bottom: 2px solid #eee !important;
+                padding-bottom: 1rem !important;
+            }
+
+            .card-surface { 
+                background: white !important; 
+                border: 1px solid #ddd !important; 
+                color: #000 !important;
+                break-inside: avoid; /* Prevent split across pages */
+                margin-bottom: 1rem !important;
+                box-shadow: none !important;
+                transition: none !important;
+                transform: none !important;
+            }
+
+            .stat-label { color: var(--total-blue) !important; }
+            .stat-value { color: #000 !important; }
+            .text-white { color: #000 !important; }
+            .text-gray-500, .text-gray-400, .text-gray-300 { color: #444 !important; }
+            .text-total-ice { color: var(--total-ice) !important; }
+            .text-total-red { color: var(--total-red) !important; }
+            
+            /* Highlighting results for readability */
+            .roadmap-table th { background: #f8f9fa !important; border-bottom: 1px solid #000 !important; color: #000 !important; }
+            .roadmap-row { border-bottom: 1px solid #eee !important; }
+            
+            .brand-gradient { background: #f8f9fa !important; border: 1px solid #ddd !important; }
+            
+            /* Chart optimization */
+            canvas { max-height: 250px !important; }
+            
+            /* Force the layout into a cleaner single column/stack if needed, 
+               but portrait A4 should handle the dashboard well at 85% zoom. */
         }
     </style>
 </head>
@@ -223,12 +271,20 @@
         </div>
     </nav>
 
+    <!-- Content meant for printing might need a clean header if nav is hidden -->
+    <div class="hidden print:block mb-6">
+        <div class="flex justify-between items-center border-b-2 border-black pb-4">
+            <h1 class="text-2xl font-black italic tracking-tighter uppercase">Paramount Partner Growth Model</h1>
+            <p class="text-xs font-bold uppercase tracking-widest">2025 Performance Forecast</p>
+        </div>
+    </div>
+
     <div class="max-w-7xl mx-auto px-6 py-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
             <!-- Sidebar -->
             <div class="lg:col-span-4 space-y-6">
-                <div class="card-surface p-6 space-y-8 no-print">
+                <div class="card-surface p-6 space-y-8">
                     <section>
                         <div class="flex justify-between items-center mb-6">
                             <h3 class="text-xs font-black uppercase tracking-widest text-gray-400">Your Store</h3>
@@ -354,7 +410,7 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="absolute -right-4 -bottom-4 text-white opacity-5 text-4xl font-black uppercase tracking-tighter">PARAMOUNT</div>
+                        <div class="absolute -right-4 -bottom-4 text-white opacity-5 text-4xl font-black uppercase tracking-tighter no-print">PARAMOUNT</div>
                     </div>
                 </div>
 
