@@ -1,1 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paramount | Partner Growth Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --total-blue: #002d72;
+            --total-red: #ed1c24;
+            --total-ice: #00a3e0;
+            --total-dark: #0a1118;
+            --total-panel: #16212c;
+            --total-border: #2d3d4d;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--total-dark);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            background-image: radial-gradient(circle at 50% 0%, rgba(0, 45, 114, 0.25) 0%, transparent 80%);
+        }
 
+        .brand-gradient {
+            background: linear-gradient(135deg, var(--total-blue) 0%, #001a45 100%);
+        }
+
+        /* High-Visibility Join CTA */
+        @keyframes cta-attention {
+            0% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
+            50% { box-shadow: 0 0 25px 5px rgba(237, 28, 36, 0.4); transform: scale(1.02); }
+            100% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
+        }
+
+        .join-cta {
+            background: linear-gradient(to right, #ed1c24, #c0161d);
+            animation: cta-attention 3s infinite ease-in-out;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--total-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--total-border); border-radius: 10px; }
+
+        /* Plan Cards */
+        .plan-card {
+            background-color: var(--total-panel);
+            border: 2px solid var(--total-border);
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .plan-card:hover { border-color: #4b5563; transform: translateY(-2px); }
+        .plan-card.active {
+            border-color: var(--total-red);
+            background-color: rgba(237, 28, 36, 0.08);
+            box-shadow: 0 10px 20px -10px rgba(237, 28, 36, 0.2);
+        }
+
+        /* Preset Chips */
+        .preset-chip {
+            background: var(--total-border);
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #94a3b8;
+            border: 1px solid transparent;
+        }
+        .preset-chip:hover { background: #4b5563; color: white; }
+        .preset-chip.active { 
+            background: var(--total-ice); 
+            color: white;
+            box-shadow: 0 0 15px rgba(0, 163, 224, 0.3);
+        }
+
+        /* Stats Cards */
+        .card-surface {
+            background-color: var(--total-panel);
+            border: 1px solid var(--total-border);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.2);
+            z-index: 10;
+        }
+        
+        .kpi-card.ice-glow:hover {
+            box-shadow: 0 20px 40px -10px rgba(0, 163, 224, 0.3);
+        }
+        
+        .kpi-card.red-glow:hover {
+            box-shadow: 0 20px 40px -10px rgba(237, 28, 36, 0.3);
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--total-ice);
+            letter-spacing: 0.12em;
+        }
+
+        .stat-detail {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #64748b;
+            letter-spacing: 0.05em;
+            line-height: 1.5;
+        }
+
+        /* Inputs - Enhanced for Mobile Tap/Typing */
+        input[type="number"] {
+            background-color: #0a1118;
+            border: 2px solid var(--total-border);
+            border-radius: 8px;
+            padding: 8px 12px;
+            color: var(--total-ice);
+            font-weight: 900;
+            font-size: 1.15rem; 
+            width: 100px; 
+            text-align: center;
+            outline: none;
+            transition: all 0.2s;
+            -moz-appearance: textfield; 
+        }
+        
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"]:focus { 
+            border-color: var(--total-ice); 
+            box-shadow: 0 0 10px rgba(0, 163, 224, 0.2);
+            background-color: #0d1721;
+        }
+
+        /* IMPROVED ROADMAP TABLE LAYOUT */
+        .roadmap-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        .roadmap-table th {
+            background: rgba(0,0,0,0.5);
+            padding: 0.75rem 0.25rem;
+            font-size: 0.8rem; 
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            color: #475569;
+            border-bottom: 1px solid var(--total-border);
+            font-weight: 900;
+        }
+        .roadmap-row { transition: all 0.2s ease; border-bottom: 1px solid rgba(255,255,255,0.02); }
+        .roadmap-row:hover { background: rgba(255,255,255,0.04); }
+
+        .growth-badge {
+            font-size: 0.6rem; padding: 1px 4px; border-radius: 2px; font-weight: 900;
+            background: rgba(0, 163, 224, 0.1); color: var(--total-ice); display: inline-block;
+            line-height: 1.2;
+        }
+
+        .milestone-tag {
+            font-size: 0.55rem; padding: 1px 5px; border-radius: 2px; font-weight: 900;
+            background: var(--total-red); color: white; text-transform: uppercase;
+            display: inline-block; margin-top: 2px;
+            line-height: 1.2;
+        }
+
+        /* Intelligence Deck Styling */
+        #eduContent { transition: opacity 0.4s ease-in-out; }
+        .edu-fade { opacity: 0; }
+        .edu-indicator {
+            height: 3px; width: 8px; background: rgba(255,255,255,0.1);
+            border-radius: 2px; transition: all 0.3s;
+        }
+        .edu-indicator.active { background: var(--total-ice); width: 20px; }
+        .stack-bar { height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; display: flex; }
+        .stack-segment { height: 100%; transition: width 0.5s ease; }
+
+        /* ADVANCED PRINT OPTIMIZATION */
+        @media print {
+            @page {
+                size: letter portrait;
+                margin: 0.2in;
+            }
+            .no-print { display: none !important; }
+            body { 
+                background: white !important; 
+                color: #000 !important; 
+                background-image: none !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .max-w-7xl {
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                transform: scale(0.85);
+                transform-origin: top center;
+            }
+            .grid { 
+                display: grid !important; 
+                grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+                gap: 15px !important;
+            }
+            .lg\:col-span-4 { grid-column: span 4 / span 4 !important; }
+            .lg\:col-span-8 { grid-column: span 8 / span 8 !important; }
+            .card-surface { 
+                background: #fdfdfd !important; 
+                border: 1px solid #ccc !important; 
+                color: #000 !important;
+                break-inside: avoid;
+                margin-bottom: 10px !important;
+                padding: 15px !important;
+            }
+            .stat-label { color: var(--total-blue) !important; font-weight: bold !important; }
+            .stat-value { color: #000 !important; }
+            .text-white { color: #000 !important; }
+            .roadmap-table th { background: #f0f0f0 !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; }
+            .roadmap-row td { border-bottom: 1px solid #ddd !important; padding: 4px !important; }
+            canvas { max-height: 220px !important; width: 100% !important; }
+            html, body { height: 99vh; overflow: hidden !important; }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="border-b border-gray-800 bg-black/40 backdrop-blur-xl sticky top-0 z-50 px-6 py-4 no-print">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4">
+                <img src="https://s12.gifyu.com/images/b39dH.png" alt="Paramount Wireless" class="h-10 w-auto object-contain">
+                
+                <div class="flex flex-col border-l border-gray-700 pl-4">
+                    <span class="text-xl font-black italic tracking-tighter uppercase leading-none">
+                        Paramount <span class="text-total-red">Partner Growth Model</span>
+                    </span>
+                    <span class="text-[9px] font-bold text-gray-500 uppercase tracking-widest mt-1">Dealer Dashboard</span>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <a href="https://submissions.p-wireless.com/r/sub-agent-application" target="_blank" class="join-cta text-[11px] font-black text-white px-7 py-2.5 rounded-full transition-all uppercase tracking-widest mr-12">
+                    Join Paramount
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-6 py-8 pb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Sidebar -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="card-surface p-6 space-y-8">
+                    <section>
+                        <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+                            <h3 class="text-xs font-black uppercase tracking-widest text-gray-400 mr-6">Your Store</h3>
+                            <div class="flex gap-2">
+                                <span class="preset-chip" onclick="applyPreset(this, 50, 10)">Startup</span>
+                                <span class="preset-chip active" id="proChip" onclick="applyPreset(this, 125, 15)">Pro</span>
+                                <span class="preset-chip" onclick="applyPreset(this, 300, 12)">Elite</span>
+                            </div>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <label class="stat-label mb-3 block">Choose Plan</label>
+                                <div class="grid grid-cols-3 gap-2">
+                                    <div class="plan-card" data-value="40" onclick="selectPlan(this)">
+                                        <span class="block text-lg font-black">$40</span>
+                                        <span class="plan-name text-[10px] uppercase font-bold text-gray-500">Base</span>
+                                    </div>
+                                    <div class="plan-card active" data-value="50" onclick="selectPlan(this)">
+                                        <span class="block text-lg font-black">$50</span>
+                                        <span class="plan-name text-[10px] uppercase font-bold text-gray-500">Total</span>
+                                    </div>
+                                    <div class="plan-card" data-value="60" onclick="selectPlan(this)">
+                                        <span class="block text-lg font-black">$60</span>
+                                        <span class="plan-name text-[10px] uppercase font-bold text-gray-500">5G+</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="stat-label mb-2 block flex items-center justify-between">
+                                    Monthly Sales (PSA)
+                                    <input type="number" id="psaInput" value="125" min="1" max="9999" oninput="syncPSA(this.value, 'slider')">
+                                </label>
+                                <input type="range" id="psaSlider" min="10" max="1000" value="125" step="5" oninput="syncPSA(this.value, 'input')" class="w-full opacity-80 accent-total-red">
+                            </div>
+
+                            <div class="pt-4 border-t border-gray-800">
+                                <div class="flex justify-between items-end mb-2 relative group">
+                                    <label class="stat-label text-gray-500 cursor-help border-b border-dotted border-gray-600 uppercase flex items-center gap-1">
+                                        Projected Churn Rate
+                                        <svg class="w-2.5 h-2.5 text-total-ice opacity-90 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </label>
+                                    
+                                    <div class="absolute bottom-full left-0 mb-3 hidden group-hover:block w-64 p-3 bg-[#1e293b] border border-gray-700 text-[10px] text-gray-300 rounded-lg shadow-2xl z-50 leading-relaxed pointer-events-none italic no-print">
+                                        <strong class="text-total-ice block mb-1 uppercase not-italic font-black">What is Churn Rate?</strong>
+                                        The percentage of customers who stop service each month. This reduces your active base and lowers your <span class="text-total-red font-bold">Stay Bonus</span> payments.
+                                    </div>
+                                    
+                                    <span class="text-base font-black text-gray-400" id="churnDisplay">15%</span>
+                                </div>
+                                <input type="range" id="churn" min="0" max="40" value="15" oninput="runCalculation()" class="w-full opacity-30">
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Strategic Growth Intelligence Deck -->
+                <div class="card-surface p-6 brand-gradient border-none relative overflow-hidden min-h-[280px] flex flex-col justify-between shadow-2xl">
+                    <div id="eduContent">
+                        <!-- Dynamic Strategic Content -->
+                    </div>
+                    
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/10 no-print">
+                        <div class="flex gap-1.5" id="eduIndicators"></div>
+                        <button onclick="nextEduSlide()" class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition-all text-white/80">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Panel -->
+            <div class="lg:col-span-8 space-y-8">
+                
+                <!-- Primary KPIs -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="card-surface kpi-card ice-glow p-6 border-b-4 border-total-ice cursor-default">
+                        <p class="stat-label mb-2">Total Value Per Sale</p>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-xl font-bold text-total-ice">$</span>
+                            <p class="stat-value text-3xl font-black tracking-tighter" id="statPerAct">0</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-800">
+                            <p class="stat-detail">Considered in Calculation:</p>
+                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed uppercase">
+                                • 50% Upfront Spiff<br>
+                                • 375% Stacked Retention<br>
+                                • 17% Airtime Rev-Share<br>
+                                • Device Margin Estimates
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card-surface kpi-card red-glow p-6 border-b-4 border-total-red cursor-default">
+                        <p class="stat-label mb-2">Month 6 Paycheck</p>
+                        <div class="flex items-baseline gap-1">
+                            <span class="text-xl font-bold text-total-red">$</span>
+                            <p class="stat-value text-3xl font-black tracking-tighter" id="statM6">0</p>
+                        </div>
+                        <div class="mt-4 pt-3 border-t border-gray-800">
+                            <p class="stat-detail">Considered in Calculation:</p>
+                            <p class="text-[9px] text-gray-500 mt-1 leading-relaxed uppercase">
+                                • Current Month Instant Spiff<br>
+                                • <span class="text-total-red">Stacked M2-M6 Bonus</span><br>
+                                • Base Residuals & Airtime<br>
+                                • Sale Volume x Achievement
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="card-surface kpi-card ice-glow brand-gradient p-6 border-b-4 border-total-ice shadow-2xl relative overflow-hidden group cursor-default">
+                        <div class="relative z-10">
+                            <p class="stat-label mb-2 text-total-ice/80">Total 1-Year Profit</p>
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-xl font-bold text-total-ice">$</span>
+                                <p class="stat-value text-3xl font-black tracking-tighter text-white" id="statYear">0</p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-white/10">
+                                <p class="stat-detail text-white/60">Considered in Calculation:</p>
+                                <p class="text-[9px] text-white/40 mt-1 leading-relaxed uppercase">
+                                    • 12-Month Aggregate Revenue<br>
+                                    • Continuous Growth Model<br>
+                                    • All Bonus Tiers Combined<br>
+                                    • Net after Estimated Losses
+                                </p>
+                            </div>
+                        </div>
+                        <div class="absolute -right-4 -bottom-4 text-white opacity-5 text-4xl font-black uppercase tracking-tighter no-print">PARAMOUNT</div>
+                    </div>
+                </div>
+
+                <!-- Projection Chart -->
+                <div class="card-surface p-8">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+                        <div>
+                            <h3 class="text-sm font-black uppercase tracking-widest text-total-ice italic">Money Growth Plan</h3>
+                            <p class="text-[10px] text-gray-500 font-bold uppercase tracking-tight">How your monthly check grows over 1 year</p>
+                        </div>
+                        <div class="flex gap-4 no-print">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-total-red shadow-[0_0_10px_#ed1c24]"></span>
+                                <span class="text-[10px] font-black uppercase text-gray-400 tracking-tighter">Monthly Pay</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-total-ice shadow-[0_0_10px_#00a3e0]"></span>
+                                <span class="text-[10px] font-black uppercase text-gray-400 tracking-tighter">Total Lines</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="h-[340px] print:h-[220px]">
+                        <canvas id="compChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Performance Roadmap -->
+                <div class="card-surface overflow-hidden">
+                    <div class="p-8 pb-4 border-b border-gray-800 bg-gray-900/40">
+                        <h3 class="text-sm font-black uppercase tracking-widest text-total-ice italic">Performance Roadmap</h3>
+                        <p class="text-[10px] text-gray-500 font-bold uppercase tracking-tight">12-Month Money Projection</p>
+                    </div>
+                    <div class="w-full">
+                        <table class="roadmap-table">
+                            <thead>
+                                <tr>
+                                    <th class="text-left px-8 w-[18%]"></th>
+                                    <th class="text-right px-4 w-[12%]">Lines</th>
+                                    <th class="text-right px-4 w-[16%]">Quick Cash</th>
+                                    <th class="text-right px-4 w-[16%]">Stay Bonus</th>
+                                    <th class="text-right px-4 w-[18%]">Monthly $</th>
+                                    <th class="text-right pr-10 w-[20%]">Total Check</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="mt-12 pt-8 border-t border-gray-800/50 text-center">
+            <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2 flex items-center justify-center gap-2 italic">
+                <span class="text-total-red not-italic">⚠️</span> Disclaimer
+            </p>
+            <p class="text-[10px] text-gray-600 uppercase leading-relaxed max-w-2xl mx-auto font-bold tracking-tight italic">
+                Predictive model only. Actual earnings vary and are subject to carrier audit, plan eligibility, and policy changes.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        let chartInstance = null;
+        let selectedPlanValue = 50;
+        let eduSlideIndex = 0;
+
+        const eduSlides = [
+            {
+                title: "How You Get Paid",
+                subtitle: "Quick Cash + Stay Bonuses",
+                content: `<div class="space-y-4"><div class="stack-bar"><div class="stack-segment bg-total-red" style="width: 12%"></div><div class="stack-segment bg-total-ice" style="width: 88%"></div></div><div class="grid grid-cols-2 gap-4"><div><p class="text-[11px] font-black text-white italic uppercase">50% Quick Cash</p><p class="text-[8px] text-white/40 uppercase leading-none mt-1">Month 1</p></div><div><p class="text-[11px] font-black text-total-ice italic uppercase">375% Stay Bonus</p><p class="text-[8px] text-white/40 uppercase mt-1">Months 2-6</p></div></div><p class="text-[9px] font-bold text-white/50 leading-relaxed uppercase mt-3 italic">Month 1 covers costs. Mo 2 to 6 is pure profit.</p></div>`
+            },
+            {
+                title: "Forever Money (17%)",
+                subtitle: "The Paramount Residual Moat",
+                content: `<div class="space-y-4"><div class="grid grid-cols-2 gap-4"><div class="bg-black/20 p-3 rounded border border-white/5 text-center"><p class="text-xl font-black italic text-total-ice">8.5%</p><p class="text-[8px] font-black text-white/40 uppercase mt-1 leading-none">Airtime</p></div><div class="bg-black/20 p-3 rounded border border-white/5 text-center"><p class="text-xl font-black italic text-total-ice">8.5%</p><p class="text-[8px] font-black text-white/40 uppercase mt-1 leading-none">Autopay</p></div></div><p class="text-[9px] font-bold text-white/60 text-center uppercase italic leading-tight mt-2">Yield on every active line, every month.</p></div>`
+            },
+            {
+                title: "Portfolio Snowball",
+                subtitle: "Wealth stacking in action",
+                content: `<div class="space-y-3"><div class="bg-white/5 p-3 rounded-lg border border-white/5 flex items-center gap-3"><div class="w-1.5 h-8 bg-total-red rounded"></div><div><p class="text-[11px] font-black text-white italic uppercase leading-none">The Stack Effect</p><p class="text-[8px] text-white/40 font-bold uppercase mt-1 leading-none">Cohorts scale as they overlap</p></div></div><div class="bg-white/5 p-3 rounded-lg border border-white/5 flex items-center gap-3"><div class="w-1.5 h-8 bg-total-ice rounded"></div><div><p class="text-[11px] font-black text-white italic uppercase leading-none">Base Value</p><p class="text-[8px] text-white/40 font-bold uppercase mt-1 leading-none">Equity grows with line count</p></div></div></div>`
+            },
+            {
+                title: "Fighter Brand Strategy",
+                subtitle: "Winning the Metro and Cricket Market",
+                content: `<div class="space-y-4"><div class="bg-black/20 p-3 rounded border border-white/5"><p class="text-[9px] font-bold text-white/60 uppercase italic leading-relaxed">Eliminate customer pain points: <span class="text-total-ice">No Activation Fees</span>, <span class="text-total-ice">No Hidden Taxes</span>, and Verizon speed power.</p></div></div>`
+            },
+            {
+                title: "12X Faster Network",
+                subtitle: "Leveraging Verizon 5G Power",
+                content: `<div class="space-y-3"><div class="bg-white/5 p-3 rounded-lg border border-white/5 flex items-center gap-3"><div class="w-2 h-2 rounded-full bg-total-red"></div><p class="text-[10px] font-bold text-white uppercase italic leading-none">12X Faster Unlimited Data</p></div><p class="text-[9px] font-bold text-white/50 leading-relaxed italic uppercase mt-1">Superior speed drives word-of-mouth growth.</p></div>`
+            },
+            {
+                title: "Success Habits",
+                subtitle: "Simple steps for more profit",
+                content: `<div class="space-y-2"><div class="bg-white/5 p-2 rounded border border-white/10 flex items-center gap-3 mb-1"><span class="text-total-ice font-black">01</span><span class="text-[10px] font-bold text-white/80 uppercase">Keep Customer 3 Months+</span></div><div class="bg-white/5 p-2 rounded border border-white/10 flex items-center gap-3 mb-1"><span class="text-total-ice font-black">02</span><span class="text-[10px] font-bold text-white/80 uppercase">Sell Family Plans</span></div><div class="bg-white/5 p-2 rounded border border-white/10 flex items-center gap-3"><span class="text-total-ice font-black">03</span><span class="text-[10px] font-bold text-white/80 uppercase">Port-In from competitors</span></div></div>`
+            }
+        ];
+
+        function renderEduSlide() {
+            const content = document.getElementById('eduContent');
+            const indicatorsContainer = document.getElementById('eduIndicators');
+            const slide = eduSlides[eduSlideIndex];
+            if(!slide) return;
+            indicatorsContainer.innerHTML = eduSlides.map((_, i) => `<div class="edu-indicator ${i === eduSlideIndex ? 'active' : ''}"></div>`).join('');
+            content.classList.add('edu-fade');
+            setTimeout(() => {
+                content.innerHTML = `
+                    <h4 class="text-[10px] font-black uppercase text-total-ice tracking-widest mb-1 italic">Growth Intelligence</h4>
+                    <p class="text-xl font-black italic text-white mb-1 leading-tight tracking-tight">${slide.title}</p>
+                    <p class="text-[9px] font-bold text-white/40 uppercase tracking-widest mb-4 italic">${slide.subtitle}</p>
+                    ${slide.content}
+                `;
+                content.classList.remove('edu-fade');
+            }, 300);
+        }
+
+        function nextEduSlide() {
+            eduSlideIndex = (eduSlideIndex + 1) % eduSlides.length;
+            renderEduSlide();
+        }
+
+        setInterval(nextEduSlide, 30000);
+
+        function syncPSA(val, targetType) {
+            let numVal = parseInt(val) || 0;
+            
+            // Hard limit at 9999
+            if (numVal > 9999) numVal = 9999;
+            
+            if (targetType === 'input') { 
+                document.getElementById('psaInput').value = numVal; 
+            } else { 
+                document.getElementById('psaSlider').value = Math.min(numVal, 1000); 
+                document.getElementById('psaInput').value = numVal;
+            }
+            
+            document.querySelectorAll('.preset-chip').forEach(c => c.classList.remove('active'));
+            runCalculation();
+        }
+
+        function applyPreset(el, psa, churn) {
+            document.getElementById('psaSlider').value = psa;
+            document.getElementById('psaInput').value = psa;
+            document.getElementById('churn').value = churn;
+            document.querySelectorAll('.preset-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            runCalculation();
+        }
+
+        function selectPlan(card) {
+            document.querySelectorAll('.plan-card').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+            selectedPlanValue = parseInt(card.dataset.value);
+            runCalculation();
+        }
+
+        function runCalculation() {
+            const monthlyPSA = parseInt(document.getElementById('psaInput').value) || 0;
+            const planPrice = selectedPlanValue;
+            const churnRate = parseInt(document.getElementById('churn').value) / 100;
+            document.getElementById('churnDisplay').innerText = (churnRate * 100).toFixed(0) + '%';
+
+            const SPIFF_M1 = 0.50, SPIFF_RET = 0.75, AIRTIME_TOTAL = 0.17, RESIDUAL = 0.03, DEVICE_MARGIN = 10.00;
+
+            let data = [], cumulativeComp = 0, cohorts = new Array(12).fill(0);
+            for (let m = 0; m < 12; m++) {
+                cohorts[m] = monthlyPSA;
+                let monthlyInstant = monthlyPSA * ( (planPrice * SPIFF_M1) + DEVICE_MARGIN );
+                let monthlyRetention = 0, monthlyResid = 0, currentActive = 0;
+                for (let prev = 0; prev <= m; prev++) {
+                    let monthsOld = m - prev;
+                    let survivors = cohorts[prev] * Math.pow(1 - churnRate, monthsOld);
+                    currentActive += survivors;
+                    if (monthsOld >= 1 && monthsOld <= 5) monthlyRetention += survivors * (planPrice * SPIFF_RET);
+                    monthlyResid += survivors * (planPrice * (AIRTIME_TOTAL + RESIDUAL));
+                }
+                let total = monthlyInstant + monthlyRetention + monthlyResid;
+                cumulativeComp += total;
+                data.push({ month: m + 1, activeBase: Math.round(currentActive), instant: monthlyInstant, retention: monthlyRetention, resid: monthlyResid, total: total });
+            }
+            updateUI(data, cumulativeComp);
+        }
+
+        function updateUI(data, cumulativeComp) {
+            const m6 = data[5], m1_total = data[0].total, plan = selectedPlanValue;
+            const valPerAct = (plan * 0.5) + (plan * 0.75 * 5) + 10 + (plan * 0.17 * 6);
+            document.getElementById('statPerAct').innerText = Math.round(valPerAct).toLocaleString();
+            document.getElementById('statM6').innerText = Math.round(m6.total).toLocaleString();
+            document.getElementById('statYear').innerText = Math.round(cumulativeComp).toLocaleString();
+            
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            data.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.className = "roadmap-row";
+                let tag = row.month === 1 ? `<span class="milestone-tag">Launch</span>` : (row.month === 6 ? `<span class="milestone-tag" style="background:var(--total-ice)">Peak</span>` : "");
+                let growth = row.month > 1 ? `<span class="growth-badge">+${((row.total - m1_total) / m1_total * 100).toFixed(0)}%</span>` : "";
+                
+                tr.innerHTML = `
+                    <td class="px-8 py-3">
+                        <div class="flex flex-col">
+                            <span class="font-black text-slate-500 italic text-[11px] uppercase leading-none">Month ${row.month < 10 ? '0'+row.month : row.month}</span>
+                            ${tag}
+                        </div>
+                    </td>
+                    <td class="px-4 py-3 text-right"><span class="font-bold text-white text-[14px]">${row.activeBase.toLocaleString()}</span></td>
+                    <td class="px-4 py-3 text-right text-slate-400 font-medium text-[14px]">$${Math.round(row.instant).toLocaleString()}</td>
+                    <td class="px-4 py-3 text-right text-slate-400 font-medium text-[14px]">$${Math.round(row.retention).toLocaleString()}</td>
+                    <td class="px-4 py-3 text-right text-slate-400 font-medium text-[14px]">$${Math.round(row.resid).toLocaleString()}</td>
+                    <td class="pr-10 py-3 text-right">
+                        <div class="flex flex-col items-end">
+                            <span class="font-black text-total-ice text-[16px] leading-tight">$${Math.round(row.total).toLocaleString()}</span>
+                            ${growth}
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+            renderChart(data);
+        }
+
+        function renderChart(data) {
+            const ctx = document.getElementById('compChart').getContext('2d');
+            if (chartInstance) chartInstance.destroy();
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(237, 28, 36, 0.4)'); gradient.addColorStop(1, 'rgba(237, 28, 36, 0)');
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: data.map(d => 'Month ' + d.month),
+                    datasets: [{ label: 'Check Total', data: data.map(d => d.total), borderColor: '#ed1c24', borderWidth: 4, fill: true, backgroundColor: gradient, tension: 0.4, pointRadius: 4, pointBackgroundColor: '#ed1c24', yAxisID: 'y' },
+                               { label: 'Lines', data: data.map(d => d.activeBase), borderColor: '#00a3e0', borderWidth: 3, borderDash: [5, 5], fill: false, yAxisID: 'y1', pointRadius: 4, pointBackgroundColor: '#00a3e0' }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+                    scales: {
+                        x: { ticks: { color: '#4b5563', font: { weight: 'bold', size: 10 } }, grid: { display: false } },
+                        y: { position: 'left', ticks: { color: '#ffffff', font: { weight: 'bold', size: 10 }, callback: v => '$' + v.toLocaleString() }, grid: { color: 'rgba(255, 255, 255, 0.05)' } },
+                        y1: { position: 'right', display: true, ticks: { color: '#00a3e0', font: { weight: 'bold', size: 10 } }, grid: { display: false } }
+                    }
+                }
+            });
+        }
+
+        window.onload = function() { renderEduSlide(); runCalculation(); };
+    </script>
+</body>
+</html>
