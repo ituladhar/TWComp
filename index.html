@@ -32,10 +32,10 @@
             background: linear-gradient(135deg, var(--total-blue) 0%, #001a45 100%);
         }
 
-        /* High-Visibility Join CTA */
+        /* UI Attention Join Button */
         @keyframes cta-attention {
             0% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
-            50% { box-shadow: 0 0 25px 5px rgba(237, 28, 36, 0.4); transform: scale(1.05); }
+            50% { box-shadow: 0 0 25px 5px rgba(237, 28, 36, 0.4); transform: scale(1.02); }
             100% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
         }
 
@@ -129,7 +129,7 @@
         .edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
         .edu-indicator.active { background: var(--total-ice); width: 20px; }
 
-        /* --- ENHANCED PRINT ENGINE: ONE PAGE PERFECTED --- */
+        /* --- DESIGNER PRINT ENGINE: ONE PAGE PROFESSIONAL REPORT --- */
         @media print {
             @page { 
                 size: letter portrait; 
@@ -150,79 +150,77 @@
             .max-w-7xl {
                 max-width: 100% !important;
                 margin: 0 auto !important;
-                padding: 0.3in 0.6in !important; /* Reduced top padding to close header gap */
-                zoom: 0.85; 
+                padding: 0.4in 0.8in !important; /* Elegant side margins */
+                zoom: 0.82; 
             }
 
             .grid { display: block !important; }
             .lg\:col-span-4, .lg\:col-span-8 { width: 100% !important; margin: 0 auto 5px auto !important; }
 
-            /* Centered Header with tight margins */
+            /* Professional Centered Header */
             .print-header {
                 display: flex !important;
                 flex-direction: column !important;
                 align-items: center !important;
-                margin-bottom: 10px !important; /* Narrowed gap */
-                border-bottom: 2px solid black !important;
-                padding-bottom: 5px !important;
+                margin-bottom: 20px !important;
+                padding-bottom: 10px !important;
+                border-bottom: 3px double #000 !important;
             }
-            .print-header img { height: 50px !important; margin-bottom: 5px !important; }
+            .print-header img { height: 55px !important; margin-bottom: 10px !important; }
+            .print-header h1 { font-size: 20pt !important; color: #000 !important; margin: 0 !important; }
+            .print-header p { font-size: 8.5pt !important; color: #666 !important; letter-spacing: 0.2em !important; margin-top: 5px !important; }
 
-            /* Narrow Summary Bar */
+            /* Compact Summary Bar */
             .print-summary-bar {
                 display: flex !important;
                 justify-content: center;
-                gap: 30px;
-                background: #f8fafc !important;
+                gap: 40px;
+                background: #f1f5f9 !important;
                 border: 1px solid #000 !important;
                 padding: 8px !important;
-                border-radius: 6px !important;
-                margin-bottom: 12px !important; /* Narrowed gap */
+                border-radius: 4px !important;
+                margin-bottom: 15px !important;
                 font-weight: 800 !important;
                 text-transform: uppercase !important;
-                font-size: 10pt !important;
-                color: #334155 !important;
+                font-size: 9.5pt !important;
+                color: #000 !important;
             }
 
-            /* Optimized KPI Row */
+            /* Balanced KPI Cards */
             .kpi-row { 
                 display: grid !important; 
                 grid-template-columns: repeat(3, 1fr) !important; 
-                gap: 10px !important;
-                margin-bottom: 12px !important;
+                gap: 12px !important;
+                margin-bottom: 15px !important;
             }
             .kpi-card { 
                 background: #fff !important; 
-                border: 1px solid #000 !important; 
-                padding: 12px !important;
+                border: 1.5px solid #000 !important; 
+                padding: 14px !important;
                 text-align: center !important;
-                box-shadow: none !important;
             }
-            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 3px !important; font-size: 7.5pt !important; }
-            .kpi-card .mt-4, .kpi-card .stat-detail { display: none !important; }
-            .stat-value { color: black !important; font-size: 20pt !important; font-weight: 900 !important; }
+            .kpi-card p.stat-label { color: #002d72 !important; margin-bottom: 4px !important; font-size: 7.5pt !important; }
+            .stat-value { color: black !important; font-size: 22pt !important; font-weight: 900 !important; }
 
-            /* Elegant Graph Sizing */
-            .graph-container { margin-bottom: 15px !important; }
-            canvas { max-height: 260px !important; width: 100% !important; }
+            /* Elegant Chart Scaling */
+            .graph-container { margin-bottom: 20px !important; }
+            canvas { max-height: 280px !important; width: 100% !important; }
 
-            /* High-Contrast Roadmap Table */
+            /* High-Contrast Professional Roadmap */
             .roadmap-table { width: 100% !important; margin: 0 auto !important; border: 1.5px solid #000 !important; border-collapse: collapse !important; }
-            .roadmap-table th { background: #f1f5f9 !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 4px !important; font-size: 8pt !important; }
+            .roadmap-table th { background: #f1f5f9 !important; color: #000 !important; border-bottom: 1.5px solid #000 !important; padding: 5px !important; font-size: 8pt !important; }
             
-            /* FIX: Dark font for all table data in PDF */
             .roadmap-row td { 
-                padding: 4px !important; 
-                border-bottom: 1px solid #cbd5e1 !important; 
-                font-size: 8.5pt !important; 
-                color: #000 !important; /* Ensure black text */
+                padding: 5px !important; 
+                border-bottom: 1px solid #ddd !important; 
+                font-size: 9pt !important; 
+                color: #1a1a1a !important; /* Sharp black text */
                 font-weight: 600 !important;
             }
-            .roadmap-row td span { color: #000 !important; } /* Override white/dim spans */
-            .roadmap-row td .text-total-ice { color: #002d72 !important; font-weight: 900 !important; } /* Contrast boost */
+            .roadmap-row td span { color: #1a1a1a !important; } /* Fix whitewash */
+            .roadmap-row td .text-total-ice { color: #002d72 !important; font-weight: 900 !important; }
 
-            .card-surface { border: 1px solid #e2e8f0 !important; background: #fff !important; }
-            .brand-gradient { background: #fff !important; border: 1.5px solid #000 !important; }
+            .card-surface { border: 1px solid #e2e8f0 !important; background: #fff !important; box-shadow: none !important; }
         }
 
         .print-summary-bar { display: none; }
@@ -253,11 +251,11 @@
         </div>
     </nav>
 
-    <!-- CENTERED PRINT HEADER -->
+    <!-- CENTERED PROFESSIONAL PRINT HEADER -->
     <div class="print-header">
-        <img src="https://s12.gifyu.com/images/b39dH.png" class="h-14 w-auto mb-2">
-        <h1 class="text-2xl font-black uppercase italic tracking-tighter" style="color:black">PARAMOUNT PARTNER PERFORMANCE FORECAST</h1>
-        <p class="text-[8pt] font-bold text-gray-500 uppercase tracking-[0.3em]">TOTAL WIRELESS EXCLUSIVE RETAIL PROGRAM</p>
+        <img src="https://s12.gifyu.com/images/b39dH.png" alt="Paramount Logo">
+        <h1 class="font-black italic uppercase tracking-tighter">PARAMOUNT PARTNER PERFORMANCE FORECAST</h1>
+        <p class="font-bold uppercase">TOTAL WIRELESS EXCLUSIVE RETAIL PROGRAM • MARCH 2025</p>
     </div>
 
     <div class="max-w-7xl mx-auto px-6 py-8">
@@ -270,7 +268,7 @@
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <!-- Sidebar (Interactive UI) -->
+            <!-- Sidebar UI (Hidden in Print) -->
             <div class="lg:col-span-4 space-y-6 no-print">
                 <div class="card-surface p-6 space-y-8">
                     <section>
@@ -322,9 +320,9 @@
                 </div>
 
                 <!-- Strategic Intelligence Deck -->
-                <div class="card-surface p-6 brand-gradient border-none relative overflow-hidden min-h-[280px] flex flex-col justify-between shadow-2xl no-print">
+                <div class="card-surface p-6 brand-gradient border-none relative overflow-hidden min-h-[280px] flex flex-col justify-between shadow-2xl">
                     <div id="eduContent"></div>
-                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/10">
+                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/10 no-print">
                         <div class="flex gap-1.5" id="eduIndicators"></div>
                         <button onclick="nextEduSlide()" class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition-all text-white/80">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
