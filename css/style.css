@@ -1,4 +1,4 @@
-/* root Variables */
+/* ─── CSS Variables ────────────────────── */
 :root {
     --total-blue: #002d72;
     --total-red: #ed1c24;
@@ -8,7 +8,9 @@
     --total-border: #2d3d4d;
 }
 
-/* Base Body Styles */
+/* ─── Base Styles ──────────────────────── */
+* { box-sizing: border-box; }
+
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--total-dark);
@@ -16,26 +18,35 @@ body {
     margin: 0;
     padding: 0;
     background-image: radial-gradient(circle at 50% 0%, rgba(0, 45, 114, 0.25) 0%, transparent 80%);
+    line-height: 1.5;
 }
 
+/* ─── Utility Classes ──────────────────── */
 .brand-gradient {
     background: linear-gradient(135deg, var(--total-blue) 0%, #001a45 100%);
 }
 
-/* Animations */
+.text-total-red { color: var(--total-red); }
+.text-total-ice { color: var(--total-ice); }
+.text-total-blue { color: var(--total-blue); }
+
+/* ─── Animations ───────────────────────── */
 @keyframes cta-attention {
     0% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
     50% { box-shadow: 0 0 25px 5px rgba(237, 28, 36, 0.4); transform: scale(1.02); }
     100% { box-shadow: 0 0 0 0 rgba(237, 28, 36, 0.6); transform: scale(1); }
 }
 
-/* Components */
+/* ─── Components ───────────────────────── */
+
+/* CTA Button */
 .join-cta {
     background: linear-gradient(to right, #ed1c24, #c0161d);
     animation: cta-attention 3s infinite ease-in-out;
     border: 1px solid rgba(255,255,255,0.2);
 }
 
+/* Card Surfaces */
 .card-surface {
     background-color: var(--total-panel);
     border: 1px solid var(--total-border);
@@ -48,10 +59,10 @@ body {
     border-color: rgba(255, 255, 255, 0.2);
     z-index: 10;
 }
-
 .kpi-card.ice-glow:hover { box-shadow: 0 20px 40px -10px rgba(0, 163, 224, 0.3); }
 .kpi-card.red-glow:hover { box-shadow: 0 20px 40px -10px rgba(237, 28, 36, 0.3); }
 
+/* Plan Selection Cards */
 .plan-card {
     background-color: var(--total-panel);
     border: 2px solid var(--total-border);
@@ -59,13 +70,16 @@ body {
     padding: 14px;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
 }
-
+.plan-card:hover { border-color: #4b5563; transform: translateY(-2px); }
 .plan-card.active {
     border-color: var(--total-red);
     background-color: rgba(237, 28, 36, 0.08);
+    box-shadow: 0 10px 20px -10px rgba(237, 28, 36, 0.2);
 }
 
+/* Preset Chips */
 .preset-chip {
     background: var(--total-border);
     padding: 6px 14px;
@@ -74,16 +88,72 @@ body {
     font-weight: 800;
     text-transform: uppercase;
     cursor: pointer;
+    transition: all 0.2s;
     color: #94a3b8;
+    border: 1px solid transparent;
 }
-
-.preset-chip.active {
-    background: var(--total-ice);
+.preset-chip:hover { background: #4b5563; color: white; }
+.preset-chip.active { 
+    background: var(--total-ice); 
     color: white;
+    box-shadow: 0 0 15px rgba(0, 163, 224, 0.3);
 }
 
-/* Roadmap Table */
-.roadmap-table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+/* Typography Helpers */
+.stat-label {
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--total-ice);
+    letter-spacing: 0.12em;
+}
+.stat-detail {
+    font-size: 0.65rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #64748b;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+}
+.stat-value {
+    color: #ffffff;
+}
+
+/* Form Inputs */
+input[type="number"] {
+    background-color: #0a1118;
+    border: 2px solid var(--total-border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: var(--total-ice);
+    font-weight: 900;
+    font-size: 1.15rem;
+    width: 100px;
+    text-align: center;
+    outline: none;
+    transition: all 0.2s;
+    -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"]:focus { 
+    border-color: var(--total-ice); 
+    box-shadow: 0 0 10px rgba(0, 163, 224, 0.2);
+    background-color: #0d1721;
+}
+input[type="range"] {
+    cursor: pointer;
+}
+
+/* ─── Roadmap Table ────────────────────── */
+.roadmap-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    table-layout: fixed; 
+}
 .roadmap-table th {
     background: rgba(0,0,0,0.5);
     padding: 0.75rem 0.25rem;
@@ -93,24 +163,140 @@ body {
     border-bottom: 1px solid var(--total-border);
     font-weight: 900;
 }
+.roadmap-row { 
+    transition: all 0.2s ease; 
+    border-bottom: 1px solid rgba(255,255,255,0.02); 
+}
+.roadmap-row:hover { 
+    background: rgba(255,255,255,0.04); 
+}
 
 .milestone-tag {
-    font-size: 0.55rem; padding: 1px 5px; border-radius: 2px; font-weight: 900;
-    background: var(--total-red); color: white; text-transform: uppercase;
+    font-size: 0.55rem; 
+    padding: 1px 5px; 
+    border-radius: 2px; 
+    font-weight: 900;
+    background: var(--total-red); 
+    color: white; 
+    text-transform: uppercase;
+    display: inline-block; 
+    margin-top: 2px;
+    line-height: 1.2;
+}
+.milestone-tag[style*="ice"] {
+    background: var(--total-ice);
 }
 
 .growth-badge {
-    font-size: 0.6rem; padding: 1px 4px; border-radius: 2px; font-weight: 900;
-    background: rgba(0, 163, 224, 0.1); color: var(--total-ice);
+    font-size: 0.6rem; 
+    padding: 1px 4px; 
+    border-radius: 2px; 
+    font-weight: 900;
+    background: rgba(0, 163, 224, 0.1); 
+    color: var(--total-ice); 
+    display: inline-block;
+    line-height: 1.2;
 }
 
-/* Intelligence Deck */
-.edu-indicator { height: 3px; width: 8px; background: rgba(255,255,255,0.1); border-radius: 2px; }
-.edu-indicator.active { background: var(--total-ice); width: 20px; }
-.stack-bar { height: 10px; background: rgba(255,255,255,0.1); border-radius: 5px; overflow: hidden; display: flex; }
+/* ─── Intelligence Deck ───────────────── */
+#eduContent { transition: opacity 0.4s ease-in-out; }
+.edu-fade { opacity: 0; }
 
-/* Print Styles */
+.edu-indicator {
+    height: 3px; 
+    width: 8px; 
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px; 
+    transition: all 0.3s;
+}
+.edu-indicator.active { 
+    background: var(--total-ice); 
+    width: 20px; 
+}
+
+.stack-bar { 
+    height: 10px; 
+    background: rgba(255,255,255,0.1); 
+    border-radius: 5px; 
+    overflow: hidden; 
+    display: flex; 
+}
+.stack-segment { 
+    height: 100%; 
+    transition: width 0.5s ease; 
+}
+
+/* ─── Custom Scrollbar ────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--total-dark); }
+::-webkit-scrollbar-thumb { 
+    background: var(--total-border); 
+    border-radius: 10px; 
+}
+
+/* ─── Print Optimization ──────────────── */
 @media print {
+    @page {
+        size: letter portrait;
+        margin: 0.2in;
+    }
+    
     .no-print { display: none !important; }
-    body { background: white !important; color: #000 !important; background-image: none !important; }
+    
+    body { 
+        background: white !important; 
+        color: #000 !important; 
+        background-image: none !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .max-w-7xl {
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        transform: scale(0.85);
+        transform-origin: top center;
+    }
+    
+    .grid { 
+        display: grid !important; 
+        grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+        gap: 15px !important;
+    }
+    .lg\:col-span-4 { grid-column: span 4 / span 4 !important; }
+    .lg\:col-span-8 { grid-column: span 8 / span 8 !important; }
+    
+    .card-surface { 
+        background: #fdfdfd !important; 
+        border: 1px solid #ccc !important; 
+        color: #000 !important;
+        break-inside: avoid;
+        margin-bottom: 10px !important;
+        padding: 15px !important;
+    }
+    
+    .stat-label { color: var(--total-blue) !important; font-weight: bold !important; }
+    .stat-value { color: #000 !important; }
+    .text-white { color: #000 !important; }
+    
+    .roadmap-table th { 
+        background: #f0f0f0 !important; 
+        color: #000 !important; 
+        border-bottom: 1.5px solid #000 !important; 
+    }
+    .roadmap-row td { 
+        border-bottom: 1px solid #ddd !important; 
+        padding: 4px !important; 
+    }
+    
+    canvas { 
+        max-height: 220px !important; 
+        width: 100% !important; 
+    }
+    
+    html, body { 
+        height: 99vh; 
+        overflow: hidden !important; 
+    }
 }
